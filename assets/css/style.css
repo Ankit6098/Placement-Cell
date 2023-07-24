@@ -1,0 +1,15 @@
+.sign-up-container {
+    display: none;
+}
+
+.sign-up-container.active {
+    display: block;
+}
+
+.sign-in-container.active {
+    display: block;
+}
+
+.sign-in-container {
+    display: none;
+}

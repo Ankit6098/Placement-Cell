@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="sign-in-container active">
+        <form action="/user/create-session" method="post">
+            <div class="input-field">
+                <span class="material-icons-outlined">mail</span>
+                <input type="mail" placeholder="email" name="email">
+            </div>
+            <div class="input-field">
+                <i></i>
+                <input type="password" placeholder="Password" name="password">
+            </div>
+            <button>Sign In</button>
+            <span class="toggle-sign-up-page">sign-up</span>
+        </form>
+    </div>
+    
+    <div class="sign-up-container">
+        <form action="/user/create-user" method="post">
+            <div class="input-field">
+                <span class="material-icons-outlined">Name</span>
+                <input type="text" placeholder="Username" name="name">
+            </div>
+            <div class="input-field">
+                <span class="material-icons-outlined">mail</span>
+                <input type="mail" placeholder="email" name="email">
+            </div>
+            <div class="input-field">
+                <i></i>
+                <input type="password" placeholder="Password" name="password">
+            </div>
+            <div class="input-field">
+                <i></i>
+                <input type="password" placeholder="Confirm Password" name="confirmPassword">
+            <button>Sign Up</button>
+            <span class="toggle-sign-in-page">sign-in</span>
+        </form>
+    </div>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>
