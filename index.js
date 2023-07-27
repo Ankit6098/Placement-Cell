@@ -6,6 +6,7 @@ require('dotenv').config();
 
 const db = require('./config/mongoose');
 const MongoStore = require('connect-mongo');
+const bcrypt = require('bcrypt');
 
 // use express urlencoded
 app.use(express.urlencoded());
@@ -13,6 +14,8 @@ app.use(express.urlencoded());
 // passport
 const passport = require('passport')
 const passportLocal = require('./config/passport-local-strategy')
+const passportGoogle = require('./config/passport-google-oauth-strategy');
+const passportGithub = require('./config/passport-github2-strategy');
 
 // set up session cookie
 const session = require('express-session');

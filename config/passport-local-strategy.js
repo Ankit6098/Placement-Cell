@@ -1,6 +1,7 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
 
 // authentication using passport
 passport.use(new LocalStrategy({
@@ -8,19 +9,44 @@ passport.use(new LocalStrategy({
     passReqToCallback: true,
 }, async function(req, email, password, done) {
 
-    const user = User.findOne({ email: email })
-    .then(user => {
-        if (!user || user.password != password) {
-            console.log('Invalid Username/Password');
-            return done(null, false);
-        }
+    // const user = User.findOne({ email: email })
+    // .then(user => {
+    //     if (!user || user.password != password) {
+    //         console.log('Invalid Username/Password');
+    //         return done(null, false);
+    //     }
 
-        return done(null, user);
-    })
-    .catch(err => {
-        console.log('Error in finding user --> Passport');
-        return done(err);
+    //     return done(null, user);
+    // })
+    // .catch(err => {
+    //     console.log('Error in finding user --> Passport');
+    //     return done(err);
+    // });
+
+    // find a user and establish the identity
+    const user = await User.findOne({email: email});
+        
+    if (!user) {
+        console.log('Invalid Username/Password');
+        return done(null, false);
+    }
+
+    // Load hash from database for the password.
+    bcrypt.compare(password, user.password)
+    .then(result => {
+        console.log(result);
+        // This will be either true or false, based on if the string
+        // matches or not.
+        if (result) {
+            return done(null, user);
+        }
+        console.log('Invalid username/password');
+        return done(null, false);
+    }).catch((error) => {
+        console.log("Error in hashing password");
+        return;
     });
+
 }));
 
 // serializing the user to decide which key is to be kept in the cookies
