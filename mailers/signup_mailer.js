@@ -12,7 +12,7 @@ exports.signupWelcome = (newUser) => {
         subject: "Welcome to Placement Cell",
         html: `<div>
         <h5>Thanks! for Signing Up on Placement Cell</h5>
-        <p>Dear [User],
+        <p>Dear,
     
         A heartfelt welcome to the Placement Cell website! We are thrilled that you have chosen to be a part of our community. With a commitment to helping you achieve your career goals, we offer a plethora of exclusive resources, job opportunities, and networking events. Your journey towards a successful future begins now, and we are excited to support you every step of the way.
         
