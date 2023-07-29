@@ -22,14 +22,14 @@ body {
     display: grid;
     grid-template-columns: 0.7fr 3.5fr 1.5fr;
     place-items: center;
-    gap: 50px;
+    gap: 2.5rem;
 }
 
 .aside-navbar-links {
     width: 100%;
-    height: 90%;
+    height: 93%;
     background-color: #fff;
-    border-radius: 20px;
+    border-radius: 30px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -43,16 +43,17 @@ body {
 }
 
 .aside-navbar-links-ul li {
+    width: auto;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 15px 20px;
+    padding: 15px;
     margin: 10px;
     border-radius: 15px;
     font-size: 0.8rem;
     font-weight: 600;
     transition: all 0.3s ease-in-out;
-    gap: 10px;
+    gap: 0.6rem;
     /* background-color: #ebf2fd; */
 }
 
@@ -60,6 +61,10 @@ body {
     background-color: #ebf2fd;
     cursor: pointer;
 }
+
+/* .dashboard-li {
+    background-color: #ebf2fd;
+} */
 
 .theme {
     display: flex;
@@ -80,7 +85,7 @@ body {
 
 .main-container {
     width: 100%;
-    height: 90%;
+    height: 93%;
     /* background-color: #fff; */
     border-radius: 20px;
     display: flex;
@@ -89,10 +94,11 @@ body {
     align-items: start;
     /* padding: 30px 0; */
     /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+    gap: 2rem;
 }
 
 .students-interviews-container {
-    width: 60%;
+    width: 100%;
     height: 25%;
     /* background-color: #fff; */
     display: flex;
@@ -101,18 +107,60 @@ body {
 
 }
 
+.companies-and-other-container {
+    width: 100%;
+    height: 25%;
+    /* background-color: #fff; */
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
 .students-container {
-    width: 50%;
+    width: 25%;
     height: 100%;
     background-color: #fff;
-    border-radius: 20px;
+    border-radius: 30px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .interviews-container {
-    width: 50%;
+    width: 25%;
     height: 100%;
     background-color: #fff;
-    border-radius: 20px;
+    border-radius: 30px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.companies-container {
+    width: 25%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-aside-container {
+    width: 100%;
+    height: 93%;
+}
+
+.reminder-container {
+    width: 100%;
+    height: 40%;
+    background-color: #e0e7fd;
+    border-radius: 30px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
