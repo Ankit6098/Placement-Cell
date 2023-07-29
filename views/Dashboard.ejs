@@ -5,11 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/1063/1063196.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="/css/_navbar.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
 </head>
 <body>
     <%- include('_navbar'); %>
-    <h1>Dashboard</h1>
-    <h2>Welcome <%= user.name %></h2>
+    
+    <div class="dashboard-main-container">
+        <div class="aside-navbar-links">
+            <ul class="aside-navbar-links-ul" type="none">
+                <li><span class="material-symbols-outlined">
+                    grid_view
+                    </span>Dashboard</li>
+                <li><span class="material-symbols-outlined">
+                    person
+                    </span>Students</li>
+                <li><span class="material-symbols-outlined">
+                    description
+                    </span>Interviews</li>
+                <li><span class="material-symbols-outlined">
+                    apartment
+                    </span>Companies</li>
+                <li></li>
+            </ul>
+            <div class="theme">
+                <span class="material-symbols-outlined">light_mode</span>
+                <span>Light Mode</span>
+            </div>
+        </div>
+        <div class="main-container">
+            
+        </div>
+        <div class="right-aside-container">
+            <span>hey i an aside</span>
+        </div>
+    </div>
+
 </body>
 </html>

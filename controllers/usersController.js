@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
+const signupMailer = require('../mailers/signup_mailer');
 
 module.exports.signinsignout = function(req, res) {
     if (req.isAuthenticated()) {
@@ -81,7 +82,8 @@ module.exports.create = async function(req, res) {
               password: hash // Store the hashed password in the database
             });
             console.log('New user created!');
-            return res.redirect('/');
+            signupMailer.signupWelcome(newUser);
+            return res.redirect('back');
           } catch (err) {
             console.error(err);
             return res.status(500).send('Error creating user');

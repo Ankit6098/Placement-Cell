@@ -2,6 +2,7 @@ const passport = require('passport');
 const githubStrategy = require('passport-github2').Strategy;
 const crypto = require('crypto');
 const User = require('../models/user');
+const signupMailer = require('../mailers/signup_mailer');
 require('dotenv').config();
 
 // tell passport to use a new strategy for github login
@@ -23,6 +24,7 @@ passport.use(new githubStrategy({
                 email: profile.emails[0].value,
                 password: crypto.randomBytes(20).toString('hex')
             });
+            signupMailer.signupWelcome(newUser);
             return done(null, newUser);
         }
     }

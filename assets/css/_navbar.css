@@ -1,8 +1,5 @@
-/* navbar */
-
 a {
     text-decoration: none;
-    /* color: aliceblue; */
     color: black;
 }
 
@@ -16,18 +13,125 @@ a {
 }
 
 .nav-inner-container {
-    width: 90%;
+    width: 93%;
+    height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .logo h4 {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 600;
     cursor: pointer;
-    /* color: #ffffff; */
     color: black;
+}
+
+.nav-login {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    font-size: 1rem;
+    gap: 0.5rem;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.nav-login h4 {
+    margin: 0;
+}
+
+.nav-login span {
+    font-size: 0.8rem;
+}
+
+.user-img {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.nav-login:hover .user-profile-nav {
+    display: flex;
+}
+
+.nav-login:hover .fa-angle-down {
+    transform: rotate(180deg);
+}
+
+.user-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-img i {
+    font-size: 0.7rem;
+}
+
+.user-profile-nav {
+    width: 290px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    position: absolute;
+    top: 80px;
+    right: 60px;
+    padding: 30px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 20px;
+    z-index: 1;
+    display: none;
+}
+
+.user-details {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    text-align: left;
+    gap: 10px;
+}
+
+.user-details img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.user-name {
+    overflow: auto;
+}
+
+.user-name h3 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.user-name span {
+    font-weight: 400;
+    overflow-wrap: break-word;
+}
+
+.user-action a i {
+    font-size: 1.3rem;
+}
+
+.user-action a span {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.user-action a {
+    display: flex;
+    align-items: center;
 }
 
 .nav-login-btn {
@@ -35,7 +139,6 @@ a {
     height: 35px;
     background-color: #333de2;
     border-radius: 10px;
-    margin: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
