@@ -2,11 +2,18 @@ const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const signupMailer = require('../mailers/signup_mailer');
 
-module.exports.signinsignout = function(req, res) {
-    if (req.isAuthenticated()) {
+module.exports.signinsignout = async function(req, res) {
+    try {
+      if (req.isAuthenticated()) {
         return res.redirect('/dashboard');
+      }
+      return res.render('signin-signout', {
+        title: 'Sign In | Sign Up',
+      });
+    } catch (err) {
+      console.log('Error', err);
+      return;
     }
-    res.render('signin-signout', { title: 'Authentication' });
 }
 
 // create session

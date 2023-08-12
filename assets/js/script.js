@@ -5,6 +5,23 @@ const toggleSignInPage = document.querySelector('.toggle-sign-in-page');
 
 const signUpPage = document.querySelector('.sign-up-container');
 const signInPage = document.querySelector('.sign-in-container');
+const adminLogin = document.querySelector('.admin-login-container');
+
+const userAdminOption = document.querySelector('.user-admin-option');
+const userOption = document.querySelector('.user-option');
+const adminOption = document.querySelector('.admin-option');
+
+userOption.addEventListener('click', () => {
+    console.log('userOption clicked');
+    signInPage.classList.add('active');
+    userAdminOption.style.display = 'none';
+});
+
+adminOption.addEventListener('click', () => {
+    console.log('adminOption clicked');
+    adminLogin.style.display = 'flex';
+    userAdminOption.style.display = 'none';
+});
 
 toggleSignUpPage.addEventListener('click', () => {
     console.log('toggleSignUpPage clicked');

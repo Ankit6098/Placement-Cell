@@ -3,13 +3,13 @@ const googleStrategy = require('passport-google-oauth2').Strategy;
 const crypto = require('crypto');
 const User = require('../models/user');
 const signupMailer = require('../mailers/signup_mailer');
-require('dotenv').config();
+const env = require('./environment');
 
 // tell passport to use a new strategy for google login
 passport.use(new googleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK_URL
+    clientID: env.GOOGLE_CLIENT_ID,
+    clientSecret: env.GOOGLE_CLIENT_SECRET,
+    callbackURL: env.GOOGLE_CALLBACK_URL
 },
     async function (accessToken, refreshToken, profile, done) {
         const user = await User.findOne({ email: profile.emails[0].value });
@@ -20,6 +20,7 @@ passport.use(new googleStrategy({
         else {
             // if not found, create the user and set it as req.user
             const newUser = await User.create({
+                avatar: profile.photos[0].value,
                 name: profile.displayName,
                 email: profile.emails[0].value,
                 password: crypto.randomBytes(20).toString('hex')

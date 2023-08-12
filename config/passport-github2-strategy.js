@@ -3,13 +3,13 @@ const githubStrategy = require('passport-github2').Strategy;
 const crypto = require('crypto');
 const User = require('../models/user');
 const signupMailer = require('../mailers/signup_mailer');
-require('dotenv').config();
+const env = require('./environment');
 
 // tell passport to use a new strategy for github login
 passport.use(new githubStrategy({
-    clientID: process.env.GITHUB_CLIENT_ID,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: process.env.GITHUB_CALLBACK_URL
+    clientID: env.GITHUB_CLIENT_ID,
+    clientSecret: env.GITHUB_CLIENT_SECRET,
+    callbackURL: env.GITHUB_CALLBACK_URL
 },
     async function (accessToken, refreshToken, profile, done) {
         const user = await User.findOne({ email: profile.emails[0].value });

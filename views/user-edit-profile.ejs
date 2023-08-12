@@ -1,0 +1,112 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link rel="stylesheet" href="/css/edit-user-profile.css">
+
+<body>
+
+    <div class="back-btn">
+        <a href="/Dashboard">
+            <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script><lottie-player src='https://lottie.host/97e7661a-fa4f-4e52-83cb-9a82ff262656/1NveXYIf0d.json' background='transparent' speed='1' style='width: 100px; height: 100px' loop direction='1' mode='normal' hover></lottie-player>
+        </a>
+    </div>
+
+    <div class="view-user-profile animate__animated animate__fadeIn">
+        <div class="user-image">
+            <img src="<%= user.avatar %>" alt="">
+            <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script><lottie-player src='https://lottie.host/aea02360-3c6f-43d6-8a74-30a465a981d7/ESRrDQw4iW.json' background='transparent' speed='1' style='width: 35px; height: 35px' autoplay direction='1' mode='normal'></lottie-player>
+        </div>
+        <h5><%= user.name %></h5>
+        <p><%= user.email %></p>
+        <span class="material-symbols-outlined edit-button" style="font-size: 1.4rem; margin: 0;">edit_square</span>
+    </div>
+
+    <div class="back-btn-user-profile">
+        <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script><lottie-player src='https://lottie.host/97e7661a-fa4f-4e52-83cb-9a82ff262656/1NveXYIf0d.json' background='transparent' speed='1' style='width: 100px; height: 100px' loop direction='1' mode='normal' hover></lottie-player>
+    </div>
+
+    <form action="/userUpdateProfile" method="post">
+        <div class="profile-container animate__animated animate__fadeIn">    
+            <div class="aside-container">
+                <p>My profile</p>
+                <p>My Account</p>
+                <p>My Ecademic</p>
+            </div>
+            <div class="main-container">
+                <h3>My Profile</h3>
+                <div class="user-profile">
+                    <p>Profile Avatar</p>
+                    <div class="user-avatar">
+                        <img src="<%= user.avatar %>" alt="">
+                        <div class="profile-change-button">
+                            <p>Max file size: 5MB</p>
+                            <button>Change Avatar</button>  
+                        </div>
+                    </div>
+                </div>
+                <div class="details-container">
+                    <div class="details">
+                        <p>First Name</p>
+                        <input type="text" placeholder="Name" name="name" value="<%= user.name %>">
+                    </div>
+                    <div class="details">
+                        <p>Last Name</p>
+                        <input type="text" placeholder="Last Name" name="lastname" value="<%= user.lastname %>">
+                    </div>
+                </div>
+                <div class="details-container">
+                    <div class="details">
+                        <p>Email</p>
+                        <input type="text" placeholder="Email" name="email" value="<%= user.email %>">
+                    </div>
+                </div>
+                <div class="details-container">
+                    <div class="details">
+                        <p>Phone</p>
+                        <input type="text" placeholder="Phone Number" name="phone" value="<%= user.phone %>">
+                    </div>
+                </div>
+                <div class="details-container">
+                    <div class="details" style="gap: 1rem;">
+                        <p>Location</p>
+                        <input type="text" placeholder="City" name="city" value="<%= user.city %>" style="width: 36%;">
+                        <input type="text" placeholder="Country" name="country" value="<%= user.country %>" style="width: 36%;">
+                    </div>
+                </div>
+                <div class="details-container">
+                    <div class="details">
+                        <p>Short Bio</p>
+                        <textarea name="" id="" cols="30" rows="10" name="bio" placeholder="White a few sentence about yourshlef here" value="<%= user.bio %>"></textarea>
+                    </div>
+                </div>
+                <div class="details-container">
+                    <div class="details">
+                        <p><img src="   https://cdn-icons-png.flaticon.com/512/3281/3281289.png " alt="" width="25px" height="25px"> Portfolio</p>
+                        <input type="text" placeholder="Portfolio" name="portfolio" value="<%= user.portfolio %>">
+                    </div>
+                    <div class="details">
+                        <p><img src="   https://cdn-icons-png.flaticon.com/512/3536/3536505.png " alt="" width="25px" height="25px"> Linkedin</p>
+                        <input type="text" placeholder="Linkedin" name="linkedin" value="<%= user.linkedin %>">
+                    </div>
+                    <div class="details">
+                        <p><img src="   https://cdn-icons-png.flaticon.com/512/733/733553.png " alt="" width="25px" height="25px"> Github</p>
+                        <input type="text" placeholder="Github" name="github" value="<%= user.github %>">
+                    </div>
+                    <div class="details">
+                        <p><img src="   https://cdn-icons-png.flaticon.com/512/733/733579.png " alt="" width="25px" height="25px"> Twitter</p>
+                        <input type="text" placeholder="Twitter" name="twitter" value="<%= user.twitter %>">
+                    </div>
+                    <div class="details">
+                        <p><img src="   https://cdn-icons-png.flaticon.com/512/174/174855.png " alt="" width="25px" height="25px"> Instagram</p>
+                        <input type="text" placeholder="Instagram" name="instagram" value="<%= user.instagram %>">
+                    </div>
+                </div>
+                <div class="details-container">
+                    <div class="save-button">
+                        <a href=""><button>Save</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script src="/js/user-profile.js"></script>
+</body>
