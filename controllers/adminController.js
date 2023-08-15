@@ -102,14 +102,32 @@ module.exports.deleteJob = async function(req, res) {
     }
 }
 
+// accept applied jobs notifications
+module.exports.acceptAppliedJobNotification = async function(req, res) {
+    const id = req.params.id;
+    try {
+        const interview = await Interview.findById(id);
+        if (interview) {
+            interview.appliedStatus = "Accepted";
+            await interview.save();
+            return res.redirect("back")
+        } else {
+            return res.redirect("back")
+        }
+    } catch(err) {
+        console.log(err);
+        return res.redirect("back")
+    }
+}
+
 // reject applied jobs notifications
 module.exports.rejectAppliedJobNotification = async function(req, res) {
     const id = req.params.id;
     try {
-        const interview = await Interview.findByIdAndUpdate(id);
+        const interview = await Interview.findById(id);
         if (interview) {
-            console.log(interview.appliedStatus, "**************************");
-            interview.appliedStatus = "Accepted";
+            interview.appliedStatus = "Rejected";
+            await interview.save();
             return res.redirect("back")
         } else {
             return res.redirect("back")

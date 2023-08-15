@@ -200,3 +200,19 @@ function closeContainerbtn() {
     interviewFormContainer.style = "display: none";
     companyAddForm.style = "display: none";
 }
+
+const acceptBtn = document.querySelectorAll('.accept-btn');
+const rejectBtn = document.querySelectorAll('.reject-btn');
+const activeAppliedContainer = document.querySelectorAll('.active-applied-container');
+
+for (let i = 0; i < acceptBtn.length; i++) {
+    acceptBtn[i].addEventListener('click', () => {
+        activeAppliedContainer[i].classList.add('animate__animated', 'animate__bounceOut');
+    });
+}
+
+for (let i = 0; i < rejectBtn.length; i++) {
+    rejectBtn[i].addEventListener('click', () => {
+        activeAppliedContainer[i].classList.add('animate__animated', 'animate__bounceOut');
+    });
+}

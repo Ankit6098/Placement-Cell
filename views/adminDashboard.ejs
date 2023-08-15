@@ -268,25 +268,27 @@
                         <p>No Notification</p>
                     </div>
                 <% } else { %>
-                    <% for (let i = 0; i < 3; i++) { %>
-                        <div class="active-applied-container" interview-id="<%=interviews[i]._id%>">
-                            <div class="applied-details">
-                                <div class="applied-company-img">
-                                    <img src="<%= interviews[i].companyImage %>" alt="">
+                    <% for (let i = 0; i < Math.min(3, interviews.length); i++) { %>
+                        <% if (interviews[i].appliedStatus == "Pending") { %>
+                            <div class="active-applied-container" interview-id="<%=interviews[i]._id%>">
+                                <div class="applied-details">
+                                    <div class="applied-company-img">
+                                        <img src="<%= interviews[i].companyImage %>" alt="">
+                                    </div>
+                                    <div>
+                                        <p><%= interviews[i].companyName %> - <%= interviews[i].companyLocation %></p>
+                                        <div><%= interviews[i].jobTitle %></div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p><%= interviews[i].companyName %> - <%= interviews[i].companyLocation %></p>
-                                    <div><%= interviews[i].jobTitle %></div>
+                                <div class="applied-job-salary">
+                                    <p><%= interviews[i].studentName %></p>
+                                </div>
+                                <div class="applied-action-buttons">
+                                    <a href="admin/accept-apllied-jobs-notification/<%= interviews[i]._id %>"><button class="accept-btn"><i class="fa-solid fa-check"></i></button></a>
+                                    <a href="admin/reject-apllied-jobs-notification/<%= interviews[i]._id %>"><button class="reject-btn"><i class="fa-solid fa-xmark"></i></button></a>
                                 </div>
                             </div>
-                            <div class="applied-job-salary">
-                                <p><%= interviews[i].studentName %></p>
-                            </div>
-                            <div class="applied-action-buttons">
-                                <a href=""></a><button class="accept-btn">Accept</button>
-                                <a href="admin/reject-apllied-jobs-notification/<%= interviews[i]._id %>"><button class="reject-btn">Reject</button></a>
-                            </div>
-                        </div>
+                        <% } %>
                     <% } %>
                 <% } %>
             </div>

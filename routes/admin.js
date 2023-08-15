@@ -24,7 +24,10 @@ router.get('/getCompanies/:id', adminController.getCompanies);
 // delete job
 router.get('/delete-job/:id', adminController.deleteJob)
 
-// applied jobs notification
+// accept jobs notification
+router.get('/accept-apllied-jobs-notification/:id', adminController.acceptAppliedJobNotification);
+
+// reject jobs notification
 router.get('/reject-apllied-jobs-notification/:id', adminController.rejectAppliedJobNotification);
 
 module.exports = router;
