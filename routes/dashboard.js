@@ -5,5 +5,7 @@ const dashboardController = require('../controllers/dashboardController');
 const passport = require('passport');
 
 router.get('/', passport.checkAuthentication, dashboardController.dashboard);
+router.get('/getJobs/:id', passport.checkAuthentication, dashboardController.getJobs);
+router.get('/applyJobs/:id', passport.checkAuthentication, dashboardController.applyJobs);
 
 module.exports = router;

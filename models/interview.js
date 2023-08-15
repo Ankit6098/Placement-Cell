@@ -1,31 +1,65 @@
 const mongoose = require('mongoose');
 
 const interviewSchema = new mongoose.Schema({
-    jobs: {
-        type: String,
-        required: true
-    },
-    student: {
-        type: String,
-        required: true
-    },
-    date: {
-        type: String,
-        required: true
-    },
-    time: {
+    job_id: {
         type: String,
     },
-    interviewmode: {
+    student_id: {
         type: String,
     },
-    status: {
+    appliedStatus: {
         type: String,
-        required: true
+        default: "Pending",
     },
-    hidden: {
-        type: String
-    }
+    interviewStatus: {
+        type: String,
+        default: "Pending",
+    },
+    companyImage: {
+        type: String,
+    },
+    companyName: {
+        type: String,
+    },
+    companyLocation: {
+        type: String,
+    },
+    companyEmail: {
+        type: String,
+    },
+    companyWebsite: {
+        type: String,
+    },
+    jobTitle: {
+        type: String,
+    },
+    jobSalary: {
+        type: String,
+    },
+    jobSkills: {
+        type: String,
+    },
+    jobDescription: {
+        type: String,
+    },
+    studentName: {
+        type: String,
+    },
+    studentImage: {
+        type: String,
+    },
+    studentLastname: {
+        type: String,
+    },
+    studentLocation: {
+        type: String,
+    },
+    studentEmail: {
+        type: String,
+    },
+    studentPhone: {
+        type: String,
+    },
 }, {
     timestamps: true,
 });

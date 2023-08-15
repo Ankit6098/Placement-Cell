@@ -1,3 +1,5 @@
 const mongoose = require('mongoose');
 
-const 
+const notificationSchema = new mongoose.Schema({
+    
+})

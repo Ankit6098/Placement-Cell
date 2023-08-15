@@ -2,18 +2,20 @@ const User = require('../models/user');
 const Job = require('../models/job');
 const Interview = require('../models/interview');
 
+// render admin dashboard
 module.exports.getAdmin = async function(req, res) {
     const students = await User.find()
     const jobs = await Job.find()
-    const interview = await Interview.find()
+    const interviews = await Interview.find()
     return res.render('adminDashboard', {
         title: "Admin Dashboard",
         students: students,
         jobs: jobs,
-        interview: interview
+        interviews: interviews
     });
 }
 
+// render admin login page
 module.exports.createAdmin = function(req, res) {
     if (req.body.username == "admin" && req.body.password == "admin") {
         console.log("admin logged in successfully");
@@ -24,6 +26,7 @@ module.exports.createAdmin = function(req, res) {
     }
 }
 
+// create jobs
 module.exports.createJobs = function(req, res) {
     Job.create(req.body)
     .then(function(job) {
@@ -36,6 +39,7 @@ module.exports.createJobs = function(req, res) {
     });
 }
 
+// assign interview
 module.exports.assignInterview = function(req, res) {
     Interview.create(req.body)
     .then(function(interview) {
@@ -48,6 +52,7 @@ module.exports.assignInterview = function(req, res) {
     });
 }
 
+// get students detials
 module.exports.getStudents = async function(req, res) {
     const id = req.params.id;
     try {
@@ -66,6 +71,7 @@ module.exports.getStudents = async function(req, res) {
     }
 }
 
+// get jobs detials
 module.exports.getCompanies = async function(req, res) {
     const id = req.params.id;
     try {
@@ -84,11 +90,30 @@ module.exports.getCompanies = async function(req, res) {
     }
 }
 
+// delete jobs
 module.exports.deleteJob = async function(req, res) {
     const id = req.params.id;
     try {
         const job = await Job.findByIdAndDelete(id);
         return res.redirect("back")
+    } catch(err) {
+        console.log(err);
+        return res.redirect("back")
+    }
+}
+
+// reject applied jobs notifications
+module.exports.rejectAppliedJobNotification = async function(req, res) {
+    const id = req.params.id;
+    try {
+        const interview = await Interview.findByIdAndUpdate(id);
+        if (interview) {
+            console.log(interview.appliedStatus, "**************************");
+            interview.appliedStatus = "Accepted";
+            return res.redirect("back")
+        } else {
+            return res.redirect("back")
+        }
     } catch(err) {
         console.log(err);
         return res.redirect("back")

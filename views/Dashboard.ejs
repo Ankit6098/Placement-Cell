@@ -6,10 +6,6 @@
     <title>Document</title>
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/1063/1063196.png" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="/css/_navbar.css">
     <link rel="stylesheet" href="/css/dashboard.css">
 </head>
@@ -21,16 +17,20 @@
             <ul class="aside-navbar-links-ul" type="none">
                 <li class="dashboard-li"><span class="material-symbols-outlined">
                     grid_view
-                    </span>Dashboard</li>
-                <!-- <li class="student-li"><span class="material-symbols-outlined">
-                    person
-                    </span>Students</li> -->
+                    </span>Dashboard
+                </li>
                 <li class="interview-li"><span class="material-symbols-outlined">
                     description
-                    </span>Interviews</li>
+                    </span>Interviews
+                </li>
                 <li class="companies-li"><span class="material-symbols-outlined">
-                    apartment
-                    </span>Companies</li>
+                    cases
+                    </span>Jobs
+                </li>
+                <li class="appliedjobs-li"><span class="material-symbols-outlined">
+                    event_note
+                    </span>Applied
+                </li>   
             </ul>
             <div class="theme">
                 <span class="material-symbols-outlined">light_mode</span>
@@ -38,6 +38,7 @@
             </div>
         </div>
 
+        <!-- dashboard -->
         <div class="dashboard-container">
             <div class="students-interviews-container">
                 <div class="interviews-container">
@@ -50,44 +51,35 @@
                 </div>
             </div>
         </div>
+
+        <!-- interview -->
         <div class="interviews-main-container">
+            <!-- heading -->
             <div class="heading">
                 <h2>Interviews</h2>
             </div>
+            <!-- active interviews -->
             <% if (!locals.interviews) { %>
                 <div class="no-found">
                     <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script><lottie-player src='https://lottie.host/f135a538-9be5-4487-b2da-7f49b93e8dbf/Y22iaG84qI.json' background='transparent' speed='1' style='width: 300px; height: 300px' loop autoplay direction='1' mode='normal'></lottie-player>
                     <p>No Interview schedule</p>
                 </div>
             <% } else { %>
-                <div class="display-container">
-                    <div class="active-interview-container">
-                        <img src="https://w7.pngwing.com/pngs/607/104/png-transparent-googleplex-google-logo-google-search-oliver-atom-text-logo-business-thumbnail.png" alt="">
-                        <div class="interview-details">
-                            <p>company name</p>
-                            <p>date</p>
-                            <p>time</p>
-                        </div>
-                    </div>
-                    <div class="active-interview-container">
-                        <img src="https://w7.pngwing.com/pngs/607/104/png-transparent-googleplex-google-logo-google-search-oliver-atom-text-logo-business-thumbnail.png" alt="">
-                        <div class="interview-details">
-                            <p>company name</p>
-                            <p>date</p>
-                            <p>time</p>
-                        </div>
-                    </div>
-                </div>
+                
             <% } %>
         </div>
+
+        <!-- jobs -->
         <div class="companies-main-container">
+            <!-- jobs -->
             <div class="heading">
-                <h2>companies</h2>
+                <h2>Jobs</h2>
                 <div class="search-container">
                     <input type="text" placeholder="Search jobs, Intership">
                     <input type="text" placeholder="Lcoation">
                 </div>
             </div>
+            <!-- active jobs -->
             <% if (jobs.length == 0) { %>
                 <div class="no-found">
                     <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script><lottie-player src='https://lottie.host/f135a538-9be5-4487-b2da-7f49b93e8dbf/Y22iaG84qI.json' background='transparent' speed='1' style='width: 300px; height: 300px' loop autoplay direction='1' mode='normal'></lottie-player>
@@ -96,7 +88,7 @@
             <% } else { %>
                 <div class="display-jobs-container">
                     <% jobs.map((job) => { %>
-                        <div class="active-jobs-container <%= job._id %>">
+                        <div class="active-jobs-container" job-id="<%=job._id%>">
                             <img src="<%= job.image %>" alt="">
                             <div class="job-details">
                                 <p><%= job.company %> - <%= job.location %></p>
@@ -107,11 +99,66 @@
                     <% }) %>
                 </div>
             <% } %>
+            <!-- more info -->
             <div class="job-more-info-container">
 
             </div>
         </div>
-                                                
+
+        <!-- applied -->
+        <div class="appliedJobs-main-container">
+            <!-- heading -->
+            <div class="heading">
+                <h2>Applied Jobs</h2>
+            </div>
+            <!-- active applied -->
+            <% let count = 0; %>
+            <div class="display-applied-container">
+                <% interviews.map((interview) => { %>
+                    <% if(interview.student_id == user._id) { %>
+                        <% count++; %>
+                        <div class="active-applied-container" job-id="<%=interview._id%>">
+                            <div class="applied-details">
+                                <div class="applied-company-img">
+                                    <img src="<%= interview.companyImage %>" alt="">
+                                </div>
+                                <div>
+                                    <p><%= interview.companyName %> - <%= interview.companyLocation %></p>
+                                    <div><%= interview.jobTitle %></div>
+                                </div>
+                            </div>
+                            <div class="applied-job-salary">
+                                <p><%= interview.jobSalary %></p>
+                            </div>
+                            <% if(interview.appliedStatus == "Pending") { %>
+                                <div class="status">
+                                    <!-- <p>Pending</p> -->
+                                    <div class="pending-color"></div>
+                                </div>
+                            <% } else if(interview.appliedStatus == "Accepted") { %>
+                                <div class="status">
+                                    <!-- <p>Accepted</p> -->
+                                    <div class="accepted-color"></div>
+                                </div>
+                            <% } else { %>
+                                <div class="status">
+                                    <!-- <p>Rejected</p> -->
+                                    <div class="rejected-color"></div>
+                                </div>
+                            <% } %>
+                        </div>
+                    <% } %>
+                <% }) %>
+                <% if (count == 0) { %>
+                    <div class="no-found">
+                        <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script><lottie-player src='https://lottie.host/f135a538-9be5-4487-b2da-7f49b93e8dbf/Y22iaG84qI.json' background='transparent' speed='1' style='width: 300px; height: 300px' loop autoplay direction='1' mode='normal'></lottie-player>
+                        <p>No Applied jobs</p>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+                       
+        <!-- right container -->
         <div class="right-aside-container">
             <div class="reminder-container">
                 <p>remainder</p>
@@ -119,6 +166,7 @@
         </div>
     </div>
 
+    <!-- js files -->
     <script src="/js/dashboard.js"></script>
 </body>
 </html>
