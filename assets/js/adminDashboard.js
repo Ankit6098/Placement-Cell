@@ -4,11 +4,13 @@ const dashboard = document.querySelector('.dashboard-li');
 const student = document.querySelector('.student-li');
 const interview = document.querySelector('.interview-li');
 const companies = document.querySelector('.companies-li');
+const application = document.querySelector('.application-li');
 
 const dashboardContainer = document.querySelector('.dashboard-container');
 const studentContainer = document.querySelector('.students-main-container');
 const interviewContainer = document.querySelector('.interviews-main-container');
 const jobsContainer = document.querySelector('.jobs-main-container');
+const applicationContainer = document.querySelector('.application-main-container');
 
 dashboard.style = "background-color: #ebf2fd";
 
@@ -21,6 +23,8 @@ dashboard.addEventListener('click', () => {
     studentContainer.style = "display: none";
     interviewContainer.style = "display: none";
     jobsContainer.style = "display: none";
+    applicationContainer.style = "display: none";
+    application.style = "background-color: none";
 });
 
 student.addEventListener('click', () => {
@@ -32,6 +36,8 @@ student.addEventListener('click', () => {
     dashboardContainer.style = "display: none";
     interviewContainer.style = "display: none";
     jobsContainer.style = "display: none";
+    applicationContainer.style = "display: none";
+    application.style = "background-color: none";
 });
 
 interview.addEventListener('click', () => {
@@ -43,6 +49,8 @@ interview.addEventListener('click', () => {
     dashboardContainer.style = "display: none";
     studentContainer.style = "display: none";
     jobsContainer.style = "display: none";
+    applicationContainer.style = "display: none";
+    application.style = "background-color: none";
 });
 
 companies.addEventListener('click', () => {
@@ -50,11 +58,27 @@ companies.addEventListener('click', () => {
     dashboard.style = "background-color: none";
     student.style = "background-color: none";
     interview.style = "background-color: none";
+    application.style = "background-color: none";
     jobsContainer.style = "display: flex";
     dashboardContainer.style = "display: none";
     studentContainer.style = "display: none";
     interviewContainer.style = "display: none";
+    applicationContainer.style = "display: none";
 });
+
+application.addEventListener('click', () => {
+    application.style = "background-color: #ebf2fd";
+    dashboard.style = "background-color: none";
+    student.style = "background-color: none";
+    interview.style = "background-color: none";
+    companies.style = "background-color: none";
+    applicationContainer.style = "display: flex";
+    dashboardContainer.style = "display: none";
+    studentContainer.style = "display: none";
+    interviewContainer.style = "display: none";
+    jobsContainer.style = "display: none";
+});
+
 
 // fetch students
 
@@ -187,12 +211,6 @@ function renderJobs(jobs) {
 // interview
 
 const interviewFormContainer = document.querySelector('.interview-form-container');
-const interviewAddButton = document.querySelector('.interview-add-button');
-
-interviewAddButton.addEventListener('click', () => {
-    console.log("interview add button clicked");
-    interviewFormContainer.style = "display: flex";
-});
 
 function closeContainerbtn() {
     studentMoreInfo.style = "display: none";
@@ -214,5 +232,45 @@ for (let i = 0; i < acceptBtn.length; i++) {
 for (let i = 0; i < rejectBtn.length; i++) {
     rejectBtn[i].addEventListener('click', () => {
         activeAppliedContainer[i].classList.add('animate__animated', 'animate__bounceOut');
+    });
+}
+
+const pendingBtn = document.querySelector('.pending-btn');
+const acceptedBtn = document.querySelector('.accepted-btn');
+
+const displayApplicationContainerPending = document.querySelector('.display-application-container-pending');
+const displayApplicationContainerAccepted = document.querySelector('.display-application-container-accepted');
+
+pendingBtn.addEventListener('click', () => {
+    console.log("pending button clicked");
+    pendingBtn.style = "background-color: #ffcc00";
+    acceptedBtn.style = "background-color: #44ac67";
+    displayApplicationContainerPending.style = "display: flex";
+    displayApplicationContainerAccepted.style = "display: none";
+});
+
+acceptedBtn.addEventListener('click', () => {
+    console.log("accepted button clicked");
+    pendingBtn.style = "background-color: #e4bc1c";
+    acceptedBtn.style = "background-color: #36ca67";
+    displayApplicationContainerAccepted.style = "display: flex";
+    displayApplicationContainerPending.style = "display: none";
+});
+
+const assignBtn = document.querySelectorAll('.assign-btn');
+
+for (let i = 0; i < assignBtn.length; i++) {
+    assignBtn[i].addEventListener('click', () => {
+        console.log("assign button clicked");
+        interviewFormContainer.style = "display: flex";
+    });
+}
+
+const editbtn = document.querySelectorAll('.edit-btn');
+
+for (let i = 0; i < editbtn.length; i++) {
+    editbtn[i].addEventListener('click', () => {
+        console.log("edit button clicked");
+        interviewFormContainer.style = "display: flex";
     });
 }

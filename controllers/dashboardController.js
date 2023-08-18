@@ -36,58 +36,49 @@ module.exports.getJobs = async function (req, res) {
 
 // apply jobs
 module.exports.applyJobs = async function (req, res) {
+
   const jobid = req.params.id;
-  const studentid = req.user.id;
-  const studentName = req.user.name;
-  const studentImage = req.user.avatar;
-  const studentLastname = req.user.lastname;
-  const studentLocation = req.user.location;
-  const studentEmail = req.user.email;
-  const studentPhone = req.user.phone;
-  
   const job = await Job.findById(jobid);
-  let companyImage = "";
-  if(companyImage == "") {
-    companyImage = "https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg";
+  
+  let companyImage;
+  if (job.image == "") {
+    companyImage = "https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg"
   } else {
     companyImage = job.image;
   }
-  const companyName = job.company;
-  const companyLocation = job.location;
-  const companyEmail = job.email;
-  const companyWebsite = job.website;
-  const jobTitle = job.title;
-  const jobSalary = job.salary;
-  const jobSkills = job.skills;
-  const jobDescription = job.description;
 
-  Interview.create(
-    {
-      job_id: jobid,
-      student_id: studentid,
+  const interview = Interview.create({
+      job_id: req.params.id,
+      student_id: req.user.id,
       companyImage: companyImage,
-      companyName: companyName,
-      companyLocation: companyLocation,
-      companyEmail: companyEmail,
-      companyWebsite: companyWebsite,
-      jobTitle: jobTitle,
-      jobSalary: jobSalary,
-      jobSkills: jobSkills,
-      jobDescription: jobDescription,
-      studentName: studentName,
-      studentImage: studentImage,
-      studentLastname: studentLastname,
-      studentLocation: studentLocation,
-      studentEmail: studentEmail,
-      studentPhone: studentPhone,
-    },
-  )
-  .then((interview) => {
-    console.log("Interview created", interview);
-    return res.redirect("back");
-  })
-  .catch((err) => {
-    console.log("Error in creating interview", err);
-    return res.redirect("back");
-  });
+      companyName: job.company,
+      companyLocation: job.location,
+      companyEmail: job.email,
+      companyWebsite: job.website,
+      jobTitle: job.title,
+      jobSalary: job.salary,
+      jobSkills: job.skills,
+      jobDescription: job.description,
+      studentName: req.user.name,
+      studentImage: req.user.avatar,
+      studentLastname: req.user.lastname,
+      studentLocation: req.user.location,
+      studentEmail: req.user.email,
+      studentPhone: req.user.phone,
+    });
+    if (interview) {
+      // req.flash('success', 'Applied successfully');
+      if (req.xhr) {
+        return res.json(200, {
+          data: {
+            interview: interview,
+          },
+          message: "Applied successfully!",
+        });
+      }
+      return res.redirect('/dashboard');
+    } else {
+      // req.flash('error', 'Error in applying');
+      return res.redirect('/dashboard');
+    }
 }

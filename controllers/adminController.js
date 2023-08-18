@@ -40,16 +40,22 @@ module.exports.createJobs = function(req, res) {
 }
 
 // assign interview
-module.exports.assignInterview = function(req, res) {
-    Interview.create(req.body)
-    .then(function(interview) {
-        console.log(interview);
+module.exports.assignInterview = async function(req, res) {
+    const interview = await Interview.findById(req.params.id);
+    if (interview) {
+        console.log("interview found");
+        interview.date = req.body.date;
+        interview.time = req.body.time;
+        interview.interviewMode = req.body.interviewMode;
+        interview.interviewStatus = req.body.interviewStatus;
+        interview.accepted = true;
+        await interview.save();
+        console.log("interview assigned successfully");
         return res.redirect('back');
-    })
-    .catch(function(err) {
-        console.log(err);
+    } else {
+        console.log("error in assigning interview");
         return res.redirect('back');
-    });
+    }
 }
 
 // get students detials

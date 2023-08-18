@@ -13,7 +13,7 @@ router.post('/create-admin', adminController.createAdmin);
 router.post('/create-jobs', adminController.createJobs);
 
 // assign interview
-router.post('/assign-interview', adminController.assignInterview);
+router.post('/assign-interview/:id', adminController.assignInterview);
 
 // get students detials
 router.get('/getStudents/:id', adminController.getStudents);

@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/1063/1063196.png" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/_navbar.css">
     <link rel="stylesheet" href="/css/dashboard.css">
 </head>
@@ -59,14 +60,40 @@
                 <h2>Interviews</h2>
             </div>
             <!-- active interviews -->
-            <% if (!locals.interviews) { %>
-                <div class="no-found">
-                    <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script><lottie-player src='https://lottie.host/f135a538-9be5-4487-b2da-7f49b93e8dbf/Y22iaG84qI.json' background='transparent' speed='1' style='width: 300px; height: 300px' loop autoplay direction='1' mode='normal'></lottie-player>
-                    <p>No Interview schedule</p>
-                </div>
-            <% } else { %>
-                
-            <% } %>
+            <% let interviewCount = 0; %>
+            <div class="display-interview-container">
+                <% interviews.map((interview) => { %>
+                    <% if (interview.accepted == true && interview.student_id == user._id) { %>
+                        <% interviewCount++; %>
+                        <div class="active-interview-container" job-id="<%=interview._id%>">
+                            <div class="interview-details">
+                                <div class="interview-company-img">
+                                    <img src="<%= interview.companyImage %>" alt="">
+                                </div>
+                                <div>
+                                    <p><%= interview.companyName %> - <%= interview.companyLocation %></p>
+                                    <div><%= interview.jobTitle %></div>
+                                </div>
+                            </div>
+                            <div class="interview-job-aplicant">
+                                <p><%= interview.studentName %></p>
+                            </div>
+                            <div class="date-time">
+                                <p><%= interview.date %>  <%= interview.time %></p>
+                            </div>
+                            <div class="interview-mode">
+                                <p><%= interview.interviewMode %></p>
+                            </div>
+                        </div>
+                    <% } %>
+                <% }) %>
+                <% if (interviewCount == 0) { %>
+                    <div class="no-found">
+                        <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script><lottie-player src='https://lottie.host/f135a538-9be5-4487-b2da-7f49b93e8dbf/Y22iaG84qI.json' background='transparent' speed='1' style='width: 300px; height: 300px' loop autoplay direction='1' mode='normal'></lottie-player>
+                        <p>No Interview Schedule</p>
+                    </div>
+                <% } %>
+            </div>
         </div>
 
         <!-- jobs -->
@@ -83,7 +110,7 @@
             <% if (jobs.length == 0) { %>
                 <div class="no-found">
                     <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script><lottie-player src='https://lottie.host/f135a538-9be5-4487-b2da-7f49b93e8dbf/Y22iaG84qI.json' background='transparent' speed='1' style='width: 300px; height: 300px' loop autoplay direction='1' mode='normal'></lottie-player>
-                    <p>No Companies found</p>
+                    <p>No Jobs Available</p>
                 </div>
             <% } else { %>
                 <div class="display-jobs-container">

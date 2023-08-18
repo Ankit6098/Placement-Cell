@@ -12,15 +12,20 @@ exports.signupWelcome = (newUser) => {
         to: newUser.email,
         subject: "Welcome to Placement Cell",
         // html: htmlString,
-        html: `<div>
-                    <h5>Thanks! for Signing Up on Placement Cell</h5>
-                    <p>Dear [User],
+        html: `<div width:"500px"; height="700px" display="flex" flex-direction="column" >
+                    <h2>Thanks! for Signing Up on Placement Cell</h2>
+                    <p>Dear ${newUser.name},</p>
                 
-                    A heartfelt welcome to the Placement Cell website! We are thrilled that you have chosen to be a part of our community. With a commitment to helping you achieve your career goals, we offer a plethora of exclusive resources, job opportunities, and networking events. Your journey towards a successful future begins now, and we are excited to support you every step of the way.
+                    <P width="90%">A heartfelt welcome to the Placement Cell website! We are thrilled 
+                    that you have chosen to be a part of our community. With a commitment to 
+                    helping you achieve your career goals, we offer a plethora of exclusive resources, 
+                    job opportunities, and networking events. Your journey towards a successful future 
+                    begins now, and we are excited to support you every step of the way.</p>
                     
+                    <p>
                     Best regards,
                     [Ankit Vishwakarma]
-                    Placement Cell Team
+                    PlaceBuddy Team
                     </p>
                 </div>`
     }, (err, info) => {

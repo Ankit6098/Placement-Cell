@@ -247,8 +247,6 @@ body {
     height: 40%;
 }
 
-/* admin css */
-
 .students-display-container {
     width: 100%;
     height: 100%;
@@ -317,8 +315,7 @@ body {
 /* interview */
 
 .interview-form-container {
-    width: 20%;
-    height: 43%;
+    width: 24%;
     background-color: #fff;
     display: flex;
     flex-direction: column;
@@ -326,6 +323,7 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 20px;
+    padding: 30px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -335,16 +333,108 @@ body {
 }
 
 .interview-form-container form {
-    width: 80%;
+    width: 90%;
     height: 80%;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     justify-content: center;
-    align-items: start;
+    align-items: center;
+}
+
+.display-interview-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: start;
+    align-items: center;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.display-interview-container::-webkit-scrollbar {
+    display: none;
+}
+
+.active-interview-container {
+    width: 70%;
+    height: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: grid;
+    place-items: center start;
+    grid-template-columns: 2fr 2fr 1fr 1fr;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.interview-details {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.interview-company-img img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.interview-action-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: #43bdd3;
+    border: none;
+    cursor: pointer;
+    font-size: 0.7rem;
+    transition: all 0.3s ease-in-out;
 }
 
 /* jobs */
+
+.search-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.search-container input {
+    width: 25%;
+    height: 40px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.company-add-btn {
+    width: 100px;
+    height: 40px;
+    border-radius: 15px;
+    background-color: #43bdd3;
+    border: none;
+    cursor: pointer;
+    font-size: 0.7rem;
+    transition: all 0.3s ease-in-out;
+    letter-spacing: 1px;
+}
 
 .jobs-main-container {
     width: 100%;
@@ -411,9 +501,10 @@ body {
 
 .company-add-form {
     width: 30%;
-    height: 70%;
+    height: 85%;
     background-color: #fff;
     border-radius: 20px;
+    padding: 30px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: flex;
     flex-direction: column;
@@ -428,7 +519,7 @@ body {
 }
 
 .company-add-form form {
-    width: 80%;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -553,4 +644,206 @@ body {
 
 .reject-btn:hover {
     background-color: #ff3f3f;
+}
+
+/* application */
+
+.application-main-container {
+    width: 100%;
+    height: 93%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 1rem;
+    display: none;
+}
+
+.display-application-container-pending {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: start;
+    align-items: center;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.display-application-container-pending::-webkit-scrollbar {
+    display: none;
+}
+
+.display-application-container-accepted {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: start;
+    align-items: center;
+    overflow: hidden;
+    overflow-y: scroll;
+    display: none;
+}
+
+.display-application-container-accepted::-webkit-scrollbar {
+    display: none;
+}
+
+.active-application-container {
+    width: 70%;
+    height: auto;
+    border-radius: 20px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    display: grid;
+    padding: 20px 30px;
+    grid-template-columns: 3fr 2fr 1fr;
+    gap: 0.5rem;
+    place-items: center start;
+    background-color: #e0e7fd;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.application-details {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.application-company-img img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.pending-btn {
+    width: 90px;
+    height: 35px;
+    border-radius: 12px;
+    background-color: #ffcc00;
+    border: none;
+    cursor: pointer;
+    font-size: 0.7rem;
+    transition: all 0.3s ease-in-out;
+    letter-spacing: 1px;
+}
+
+.accepted-btn {
+    width: 90px;
+    height: 35px;
+    border-radius: 12px;
+    background-color: #44ac67;
+    border: none;
+    cursor: pointer;
+    font-size: 0.7rem;
+    transition: all 0.3s ease-in-out;
+    letter-spacing: 1px;
+}
+
+
+
+
+
+.form-heading {
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.input-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.input-container input {
+    width: 90%;
+    height: 100%;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    padding: 13px 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    background-color: #ebf2fd;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+.input-container textarea {
+    width: 90%;
+    height: 100%;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    resize: none;
+    background-color: #ebf2fd;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+.input-container select {
+    width: 90%;
+    height: 100%;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    padding: 13px 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    background-color: #ebf2fd;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+.input-container label {
+    width: 50%;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.input-container input[type="file"] {
+    width: 90%;
+    height: 100%;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    padding: 13px 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    background-color: #ebf2fd;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+.submit-btn {
+    width: 95%;
+    display: flex;
+    justify-content: end;
+}
+
+.submit-btn button {
+    width: 100px;
+    height: 40px;
+    border-radius: 15px;
+    background-color: #43bdd3;
+    border: none;
+    cursor: pointer;
+    font-size: 0.7rem;
+    transition: all 0.3s ease-in-out;
+    letter-spacing: 1px;
 }

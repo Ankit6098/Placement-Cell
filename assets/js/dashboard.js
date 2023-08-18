@@ -114,7 +114,7 @@ function renderJobs(jobs) {
             <div class="company-more-info-details-description">
                 <p>${jobs.description}</p>
             </div>
-            <a href="/dashboard/applyJobs/${jobs._id}" class="company-more-info-details-apply-btn"><button>Apply</button></a>
+            <button class="company-more-info-details-apply-btn" job-id="${jobs._id}" onclick="applyJobs()">Apply</button>
             <i onclick="closeContainerbtn()" class="fa-solid fa-xmark container-close-btn"></i>
         </div>
     `;
@@ -128,3 +128,46 @@ function renderJobs(jobs) {
 function closeContainerbtn() {
     jobMoreInfoContainer.style = "display: none";
 }
+
+
+// apply job fetch request
+
+function applyJobs() {
+    const applyJobsRequest = document.querySelector(".company-more-info-details-apply-btn");
+    console.log("apply job button clicked");
+    const id = applyJobsRequest.getAttribute('job-id');
+    fetch(`/dashboard/applyJobs/${id}`, {
+        method: "POST"
+    })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(err => console.log(err));
+}
+
+
+// ajax request for applied jobs
+
+const applyJobsRequest = document.querySelector(".company-more-info-details-apply-btn");
+
+for (let i = 0; i < applyJobsRequest.length; i++) {
+    let newApplyJobsRequest = applyJobsRequest[i]; // Use applyJobsRequest[i] to get the current element
+
+    newApplyJobsRequest.submit(function (e) { // Use addEventListener to attach the submit event
+        e.preventDefault();
+        // Assuming you want to extract the job ID from some attribute of the element, for example:
+        const jobId = newApplyJobsRequest.getAttribute("data-job-id"); // Replace "data-job-id" with the actual attribute name
+        $.ajax({
+            type: "GET",
+            url: `/dashboard/applyJobs/${jobId}`, // Use template literals to insert the jobId
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    });
+}
+
