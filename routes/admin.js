@@ -22,7 +22,7 @@ router.get('/getStudents/:id', adminController.getStudents);
 router.get('/getCompanies/:id', adminController.getCompanies);
 
 // delete job
-router.get('/delete-job/:id', adminController.deleteJob)
+router.get('/delete-job/:id', adminController.deleteJob);
 
 // accept jobs notification
 router.get('/accept-apllied-jobs-notification/:id', adminController.acceptAppliedJobNotification);

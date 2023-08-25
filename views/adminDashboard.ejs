@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/_navbar.css">
     <link rel="stylesheet" href="/css/admin.css">
 </head>
@@ -140,7 +141,7 @@
                             </div>
                         </div>
                         <div class="interview-form-container">
-                            <form action="/admin/assign-interview/<%= interview._id %>" method="post">
+                            <form action="/admin/assign-interview/<%= interview._id %>" interview-id="interview._id" method="post" id="interview-form">
                                 <div class="input-container">
                                     <label for="date">Date : </label>
                                     <input type="date" name="date" required>
@@ -197,35 +198,74 @@
 
             <!-- form -->
             <div class="company-add-form">
-                <form action="admin/create-jobs" method="post">
+                <form action="admin/create-jobs" method="post" id="company-form">
                     <div class="form-heading">
                         <h2>Company Details</h2>
                     </div>
                     <div class="input-container">
-                        <input type="text" name="image" class="company-input" placeholder="Company Logo">
+                        <span class="material-symbols-outlined">
+                            domain
+                            </span>
+                        <input type="text" name="companyImage" class="company-input" placeholder="Company Logo">
                     </div>
                     <div class="input-container">
-                        <input type="text" name="company" class="company-input" placeholder="Company Name">
+                        <span class="material-symbols-outlined">
+                            badge
+                            </span>
+                        <input type="text" name="companyName" class="company-input" placeholder="Company Name">
                     </div>
                     <div class="input-container">
-                        <input type="text" name="title" class="company-input" placeholder="Job Title">
+                        <span class="material-symbols-outlined">
+                            location_on
+                            </span>
+                        <input type="text" name="companylocation" class="company-input" placeholder="Location">
                     </div>
                     <div class="input-container">
+                        <span class="material-symbols-outlined">
+                            work
+                            </span>
+                        <input type="text" name="jobTitle" class="company-input" placeholder="Job Title">
+                    </div>
+                    <div class="input-container">
+                        <span class="material-symbols-outlined">
+                            attach_money
+                            </span>
                         <input type="text" name="salary" class="company-input" placeholder="Salary">
                     </div>
                     <div class="input-container">
-                        <textarea name="description" class="company-input" cols="30" rows="10" placeholder="Job Description"></textarea>
+                        <span class="material-symbols-outlined">
+                            sell
+                            </span>
+                        <input type="text" name="skills" class="company-input" placeholder="Skills">
                     </div>
                     <div class="input-container">
-                        <input type="text" name="company-phone" class="company-input" placeholder="Contact No.">
+                        <span class="material-symbols-outlined">
+                            beenhere
+                            </span>
+                        <input type="text" name="experience" class="company-input" placeholder="Experience">
                     </div>
                     <div class="input-container">
-                        <input type="text" name="location" class="company-input" placeholder="Location">
+                        <span class="material-symbols-outlined">
+                            description
+                            </span>
+                        <textarea name="companyDescription" class="company-input" cols="30" rows="10" placeholder="Company Description"></textarea>
                     </div>
                     <div class="input-container">
+                        <span class="material-symbols-outlined">
+                            description
+                            </span>
+                        <textarea name="jobDescription" class="company-input" cols="30" rows="10" placeholder="Job Description"></textarea>
+                    </div>
+                    <div class="input-container">
+                        <span class="material-symbols-outlined">
+                            mail
+                            </span>
                         <input type="text" name="email" class="company-input" placeholder="Email">
                     </div>
                     <div class="input-container">
+                        <span class="material-symbols-outlined">
+                            language
+                            </span>
                         <input type="text" name="website" class="company-input" placeholder="Website">
                     </div>
                     <div class="submit-btn">
@@ -250,10 +290,14 @@
                 <div class="active-jobs-container">
                     <% jobs.map((job) => { %>
                         <div class="active-jobs" data-id= "<%= job._id %>">
-                            <img src="<%= job.image %>" alt="">
+                            <% if (job.companyImage == "") { %>
+                                <img src="https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg" alt="">
+                            <% } else { %>
+                            <img src="<%= job.companyImage %>" alt="">
+                            <% } %>
                             <div class="job-details">
-                                <p><%= job.company %> - <%= job.location %></p>
-                                <p><%= job.title %></p>
+                                <p><%= job.companyName %> - <span><%= job.companylocation %></span></p>
+                                <p><%= job.jobTitle %></p>
                                 <p><%= job.salary %></p>
                             </div>
                         </div>
@@ -268,6 +312,7 @@
             <div class="heading">
                 <h2>Applied Jobs</h2>
                 <heading class="buttons">
+                    <button class="all-btn">All</button>
                     <button class="pending-btn">pending</button>
                     <button class="accepted-btn">accepted</button>
                 </heading>
@@ -305,6 +350,34 @@
                     </div>
                 <% } %>
             </div>
+            <div class="display-application-container">
+                <% if (interviews.length == 0) { %>
+                    <div class="no-found">
+                        <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script><lottie-player src='https://lottie.host/f135a538-9be5-4487-b2da-7f49b93e8dbf/Y22iaG84qI.json' background='transparent' speed='1' style='width: 300px; height: 300px' loop autoplay direction='1' mode='normal'></lottie-player>
+                        <p>No Applied jobs</p>
+                    </div>
+                <% } %>
+                <% interviews.map((interview) => { %>
+                    <div class="active-application-container" job-id="<%=interview._id%>">
+                        <div class="application-details">
+                            <div class="application-company-img">
+                                <img src="<%= interview.companyImage %>" alt="">
+                            </div>
+                            <div>
+                                <p><%= interview.companyName %> - <%= interview.companyLocation %></p>
+                                <div><%= interview.jobTitle %></div>
+                            </div>
+                        </div>
+                        <div class="application-job-aplicant">
+                            <p><%= interview.studentName %></p>
+                        </div>
+                        <div class="applied-action-buttons">
+                            <a href="admin/accept-apllied-jobs-notification/<%= interview._id %>"><button class="accept-btn"><i class="fa-solid fa-check"></i></button></a>
+                            <a href="admin/reject-apllied-jobs-notification/<%= interview._id %>"><button class="reject-btn"><i class="fa-solid fa-xmark"></i></button></a>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
             <div class="display-application-container-accepted">
                 <% interviews.map((interview) => { %>
                     <% if (interview.appliedStatus == "Accepted") { %>
@@ -324,7 +397,7 @@
                             </div>
                             <% if (interview.accepted == false) { %>
                                 <div class="assign-interview">
-                                    <button class="assign-btn">Assign interview</button>
+                                    <button class="application-assign-btn">Assign interview</button>
                                 </div>
                             <% } else { %>
                                 <div class="date-time">
@@ -333,8 +406,8 @@
                             <% } %>
                         </div>
                         <!-- form -->
-                        <div class="interview-form-container">
-                            <form action="/admin/assign-interview/<%= interview._id %>" method="post">
+                        <div class="application-interview-form-container">
+                            <form action="/admin/assign-interview/<%= interview._id %>" interview-id="<%= interview._id %>" method="post" id="interview-form">
                                 <div class="input-container">
                                     <label for="date">Date : </label>
                                     <input type="date" name="date" required>

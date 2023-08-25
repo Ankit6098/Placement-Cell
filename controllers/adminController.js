@@ -27,16 +27,23 @@ module.exports.createAdmin = function(req, res) {
 }
 
 // create jobs
-module.exports.createJobs = function(req, res) {
-    Job.create(req.body)
-    .then(function(job) {
-        console.log(job);
+module.exports.createJobs = async function(req, res) {
+    const job = await Job.create(req.body)
+    if (job) {
+        console.log("job created successfully");
+        if (req.xhr) {
+            return res.json(200, {
+              data: {
+                job: job,
+              },
+              message: "Job created successfully!",
+            });
+        }   
         return res.redirect('back');
-    })
-    .catch(function(err) {
-        console.log(err);
+    } else {
+        console.log("error in creating job");
         return res.redirect('back');
-    });
+    }
 }
 
 // assign interview
@@ -50,6 +57,14 @@ module.exports.assignInterview = async function(req, res) {
         interview.interviewStatus = req.body.interviewStatus;
         interview.accepted = true;
         await interview.save();
+        if (req.xhr) {
+            return res.json(200, {
+              data: {
+                interview: interview,
+              },
+              message: "Interview Assign successfully!",
+            });
+        }
         console.log("interview assigned successfully");
         return res.redirect('back');
     } else {

@@ -1,34 +1,43 @@
 const mongoose = require('mongoose');
 
 const jobSchema = new mongoose.Schema({
-    image: {
-        type: String,
+    companyImage: {
+        type: String
     },
-    company: {
-        type: String,
+    companyName: {
+        type: String
     },
-    title: {
-        type: String,
-        required: true,
+    companylocation: {
+        type: String
     },
-    location: {
-        type: String,
-    },
-    description: {
-        type: String,
+    jobTitle: {
+        type: String
     },
     salary: {
-        type: String,
+        type: String
     },
     skills: {
-        type: String,
+        type: String
+    },
+    experience: {
+        type: String
+    },
+    companyDescription: {
+        type: String
+    },
+    jobDescription: {
+        type: String
     },
     email: {
-        type: String,
+        type: String
     },
     website: {
-        type: String,
+        type: String
     },
+    applicantList: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
 }, {
     timestamps: true,
 });

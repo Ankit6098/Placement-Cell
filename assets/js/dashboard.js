@@ -64,7 +64,7 @@ const jobMoreInfoContainer = document.querySelector(".job-more-info-container");
 for (let i = 0; i < activeJob.length; i++) {
     activeJob[i].addEventListener('click', () => {
         console.log("more info button clicked");
-        const id = activeJob[i].getAttribute('job-id');
+        const id = activeJob[i].getAttribute('data-id');
         fetch(`/dashboard/getJobs/${id}`)
             .then(res => res.json())
             .then(data => {
@@ -77,49 +77,56 @@ for (let i = 0; i < activeJob.length; i++) {
 
 function renderJobs(jobs) {
     jobMoreInfoContainer.innerHTML = '';
-    if (jobs.image == "") {
-        jobs.image = "https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg";
+    if (jobs.companyImage == "") {
+        jobs.companyImage = "https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg";
     } else {
-        jobs.image = jobs.image;
+        jobs.companyImage = jobs.companyImage;
     }
-
+    
+    
     const element = document.createElement('div');
     element.classList.add('company-more-info');
     element.innerHTML = `
-        <div class="company-more-info-img">
-            <img src="${jobs.image}" alt="company image">
+        <div className="company-more-info-upper-container" style="display:flex; gap:1rem">
+            <div class="company-more-info-img">
+                <img src="${jobs.companyImage}" alt="company image">
+            </div>
+            <div class="company-more-info-text">
+                <p><span class="company-more-info-name">${jobs.companyName} -</span><span class="company-more-info-location"> ${jobs.companylocation}</span></p>
+                <p class="company-more-info-job-title">${jobs.jobTitle}</p>
+                <p class="company-more-info-skills">${jobs.skills}</p>
+                <p class="company-more-info-salary">${jobs.salary}</p>
+                <p class="company-more-info-expreince">${jobs.experience} Experience</p>
+            </div>
         </div>
-        <div class="company-more-info-details">
-            <div class="company-more-info-details-name">
-                <h3>${jobs.company}</h3>
+        <div class="company-more-info-middle-container">
+            <div className="div">
+                <h5 style="margin-bottom: 5px">About Company</h5>
+                <p class="company-more-info-company-description">${jobs.companyDescription}</p>
             </div>
-            <div class="company-more-info-details-email">
-                <h4>${jobs.email}</h4>
-            </div>
-            <div class="company-more-info-details-website">
-                <h4>${jobs.website}</h4>
-            </div>
-            <div class="company-more-info-details-title">
-                <h4>${jobs.title}</h4>
-            </div>
-            <div class="company-more-info-details-location">
-                <h4>${jobs.location}</h4>
-            </div>
-            <div class="company-more-info-details-salary">
-                <p>Salary: ${jobs.salary}</p>
-            </div>
-            <div class="company-more-info-details-skills">
-                <p>skills: ${jobs.skills}</p>
-            </div>
-            <div class="company-more-info-details-description">
-                <p>${jobs.description}</p>
+            <div className="div">
+                <h5 style="margin-bottom: 5px"> About Job</h5>
+                <p class="company-more-info-job-description">${jobs.jobDescription}</p>
             </div>
             <button class="company-more-info-details-apply-btn" job-id="${jobs._id}" onclick="applyJobs()">Apply</button>
-            <i onclick="closeContainerbtn()" class="fa-solid fa-xmark container-close-btn"></i>
         </div>
+        
+        <i onclick="closeContainerbtn()" class="fa-solid fa-xmark container-close-btn"></i>
     `;
+    console.log(jobs.applicantList);
+    for (let i = 0; i < jobs.applicantList.length; i++) {
+        console.log("applicant list", jobs.applicantList[i]);
+        if (jobs.applicantList[i] == jobs.applicantList[i]) {
+            const applyJobsRequest = document.querySelector('.company-more-info-details-apply-btn');
+            console.log("user already applied for this job");
+            applyJobsRequest.style = "cursor: not-allowed;";
+            applyJobsRequest.innerHTML = "Applied";
+        }
+    }
     jobMoreInfoContainer.appendChild(element);
 }
+
+
 
 // apply jobs
 
@@ -133,13 +140,19 @@ function closeContainerbtn() {
 // apply job fetch request
 
 function applyJobs() {
-    const applyJobsRequest = document.querySelector(".company-more-info-details-apply-btn");
+    const applyJobsRequest = document.querySelector('.company-more-info-details-apply-btn');
     console.log("apply job button clicked");
+    applyJobsRequest.style = "cursor: not-allowed;";
+    applyJobsRequest.innerHTML = "Applied";
     const id = applyJobsRequest.getAttribute('job-id');
+    console.log(id);
     fetch(`/dashboard/applyJobs/${id}`, {
         method: "POST"
     })
-        .then(res => res.json())
+        .then(res => {
+            console.log(res, "response");
+            console.log(res.json(), "response json");
+            res.json()})
         .then(data => {
             console.log(data);
         })
@@ -149,25 +162,25 @@ function applyJobs() {
 
 // ajax request for applied jobs
 
-const applyJobsRequest = document.querySelector(".company-more-info-details-apply-btn");
+// const applyJobsRequest = document.querySelector(".company-more-info-details-apply-btn");
 
-for (let i = 0; i < applyJobsRequest.length; i++) {
-    let newApplyJobsRequest = applyJobsRequest[i]; // Use applyJobsRequest[i] to get the current element
+// for (let i = 0; i < applyJobsRequest.length; i++) {
+//     let newApplyJobsRequest = applyJobsRequest[i]; // Use applyJobsRequest[i] to get the current element
 
-    newApplyJobsRequest.submit(function (e) { // Use addEventListener to attach the submit event
-        e.preventDefault();
-        // Assuming you want to extract the job ID from some attribute of the element, for example:
-        const jobId = newApplyJobsRequest.getAttribute("data-job-id"); // Replace "data-job-id" with the actual attribute name
-        $.ajax({
-            type: "GET",
-            url: `/dashboard/applyJobs/${jobId}`, // Use template literals to insert the jobId
-            success: function (response) {
-                console.log(response);
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
-    });
-}
+//     newApplyJobsRequest.submit(function (e) { // Use addEventListener to attach the submit event
+//         e.preventDefault();
+//         // Assuming you want to extract the job ID from some attribute of the element, for example:
+//         const jobId = newApplyJobsRequest.getAttribute("data-job-id"); // Replace "data-job-id" with the actual attribute name
+//         $.ajax({
+//             type: "GET",
+//             url: `/dashboard/applyJobs/${jobId}`, // Use template literals to insert the jobId
+//             success: function (response) {
+//                 console.log(response);
+//             },
+//             error: function (err) {
+//                 console.log(err);
+//             }
+//         });
+//     });
+// }
 

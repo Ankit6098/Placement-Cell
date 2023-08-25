@@ -11,9 +11,33 @@ const studentContainer = document.querySelector('.students-main-container');
 const interviewContainer = document.querySelector('.interviews-main-container');
 const jobsContainer = document.querySelector('.jobs-main-container');
 const applicationContainer = document.querySelector('.application-main-container');
+const interviewFormContainer = document.querySelector('.interview-form-container');
+const applicationInterviewFormContainer = document.querySelector('.application-interview-form-container');
+const studentMoreInfo = document.querySelector('.student-more-info-container');
+const studentMoreInfoCloseBtn = document.querySelector('.student-more-info-close-btn');
+const activeStudent = document.querySelectorAll('.students-inner-container');
+const companyAddBtn = document.querySelector('.company-add-btn');
+const companyAddFormContainer = document.querySelector('.company-add-form');
+const companyCloseBtn = document.querySelector('.company-close-btn');
+const activeJob = document.querySelectorAll('.active-jobs');
+const companyMoreInfo = document.querySelector('.company-more-info-container');
+const acceptBtn = document.querySelectorAll('.accept-btn');
+const rejectBtn = document.querySelectorAll('.reject-btn');
+const activeAppliedContainer = document.querySelectorAll('.active-applied-container');
+const allBtn = document.querySelector('.all-btn');
+const pendingBtn = document.querySelector('.pending-btn');
+const acceptedBtn = document.querySelector('.accepted-btn');
+const displayApplicationContainer = document.querySelector('.display-application-container');
+const displayApplicationContainerPending = document.querySelector('.display-application-container-pending');
+const displayApplicationContainerAccepted = document.querySelector('.display-application-container-accepted');
+const applicationAssignBtn = document.querySelectorAll('.application-assign-btn');
+const editbtn = document.querySelectorAll('.edit-btn');
+const interviewFrom = document.querySelector('#interview-form');
+const addCompanyForm = document.querySelector('#company-form');
+const activeJobsContainer = document.querySelector('.active-jobs-container');
 
+// dashboard side navbar
 dashboard.style = "background-color: #ebf2fd";
-
 dashboard.addEventListener('click', () => {
     dashboard.style = "background-color: #ebf2fd";
     student.style = "background-color: none";
@@ -80,12 +104,7 @@ application.addEventListener('click', () => {
 });
 
 
-// fetch students
-
-const studentMoreInfo = document.querySelector('.student-more-info-container');
-const studentMoreInfoCloseBtn = document.querySelector('.student-more-info-close-btn');
-const activeStudent = document.querySelectorAll('.students-inner-container');
-
+// fetch students more info
 for (let i = 0; i < activeStudent.length; i++) {
     activeStudent[i].addEventListener('click', () => {
     console.log("more info button clicked");
@@ -125,26 +144,18 @@ function renderStudents(students) {
                 <p class="student-more-info-linkedin">${students.linkedin}</p>
                 <p class="student-more-info-twitter">${students.twitter}</p>
                 <p class="student-more-info-instagram">${students.instagram}</p>
-                <i onclick="closeContainerbtn()" class="fa-solid fa-xmark container-close-btn"></i>
             </div>
+            <i onclick="closeContainerbtn()" class="fa-solid fa-xmark container-close-btn"></i>
         </div>
     `;
     studentMoreInfo.appendChild(element);
 }
 
-// fetch jobs
 
-const companyAddBtn = document.querySelector('.company-add-btn');
-const companyAddForm = document.querySelector('.company-add-form');
-const companyCloseBtn = document.querySelector('.company-close-btn');
-
+// fetch jobs more info
 companyAddBtn.addEventListener('click', () => {
-    companyAddForm.style = "display: flex";
+    companyAddFormContainer.style = "display: flex";
 });
-
-const activeJob = document.querySelectorAll('.active-jobs');
-const companyMoreInfo = document.querySelector('.company-more-info-container');
-
 
 for (let i = 0; i < activeJob.length; i++) {
     activeJob[i].addEventListener('click', () => {
@@ -157,120 +168,212 @@ for (let i = 0; i < activeJob.length; i++) {
             renderJobs(data.data.jobs);
         })
         .catch(err => console.log(err));
-    companyMoreInfo.style = "display: block";
+    companyMoreInfo.style = "display: flex";
 });
 }
 
 function renderJobs(jobs) {
     companyMoreInfo.innerHTML = '';
-    if (jobs.image == "") {
-        jobs.image = "https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg";
+    if (jobs.companyImage == "") {
+        jobs.companyImage = "https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg";
     } else {
-        jobs.image = jobs.image;
+        jobs.companyImage = jobs.companyImage;
     }
 
     const element = document.createElement('div');
     element.classList.add('company-more-info');
     element.innerHTML = `
-        <div class="company-more-info-img">
-            <img src="${jobs.image}" alt="company image">
+        <div className="company-more-info-upper-container" style="display:flex; gap:1rem">
+            <div class="company-more-info-img">
+                <img src="${jobs.companyImage}" alt="company image">
+            </div>
+            <div class="company-more-info-text">
+                <p><span class="company-more-info-name">${jobs.companyName} -</span><span class="company-more-info-location"> ${jobs.companylocation}</span></p>
+                <p class="company-more-info-job-title">${jobs.jobTitle}</p>
+                <p class="company-more-info-skills">${jobs.skills}</p>
+                <p class="company-more-info-salary">${jobs.salary}</p>
+                <p class="company-more-info-expreince">${jobs.experience} Experience</p>
+            </div>
         </div>
-        <div class="company-more-info-details">
-            <div class="company-more-info-details-name">
-                <h3>${jobs.company}</h3>
+        <div class="company-more-info-middle-container">
+            <div className="div">
+                <h5 style="margin-bottom: 5px">About Company</h5>
+                <p class="company-more-info-company-description">${jobs.companyDescription}</p>
             </div>
-            <div class="company-more-info-details-email">
-                <h4>${jobs.email}</h4>
+            <div className="div">
+                <h5 style="margin-bottom: 5px"> About Job</h5>
+                <p class="company-more-info-job-description">${jobs.jobDescription}</p>
             </div>
-            <div class="company-more-info-details-website">
-                <h4>${jobs.website}</h4>
-            </div>
-            <div class="company-more-info-details-title">
-                <h4>${jobs.title}</h4>
-            </div>
-            <div class="company-more-info-details-location">
-                <h4>${jobs.location}</h4>
-            </div>
-            <div class="company-more-info-details-salary">
-                <p>Salary: ${jobs.salary}</p>
-            </div>
-            <div class="company-more-info-details-skills">
-                <p>skills: ${jobs.skills}</p>
-            </div>
-            <div class="company-more-info-details-description">
-                <p>${jobs.description}</p>
-            </div>
-            <button class="company-edit-button" data-id="${jobs._id}">Edit</button>
-            <a href="admin/delete-job/${jobs._id}"><button class="company-delete-button" data-id="${jobs._id}">Delete</button></a>
-            <i onclick="closeContainerbtn()" class="fa-solid fa-xmark container-close-btn"></i>
+            <button class="company-delete-button" data-id="${jobs._id}" onclick="deleteCompany()">Delete</button>
         </div>
+        <i onclick="closeContainerbtn()" class="fa-solid fa-xmark container-close-btn"></i>
     `;
     companyMoreInfo.appendChild(element);
 }
 
 // interview
-
-const interviewFormContainer = document.querySelector('.interview-form-container');
-
 function closeContainerbtn() {
     studentMoreInfo.style = "display: none";
     companyMoreInfo.style = "display: none";
-    interviewFormContainer.style = "display: none";
-    companyAddForm.style = "display: none";
+    // interviewFormContainer.style = "display: none";
+    companyAddFormContainer.style = "display: none";
+    // applicationInterviewFormContainer.style = "display: none";
 }
 
-const acceptBtn = document.querySelectorAll('.accept-btn');
-const rejectBtn = document.querySelectorAll('.reject-btn');
-const activeAppliedContainer = document.querySelectorAll('.active-applied-container');
-
+// notification accept button
 for (let i = 0; i < acceptBtn.length; i++) {
     acceptBtn[i].addEventListener('click', () => {
         activeAppliedContainer[i].classList.add('animate__animated', 'animate__bounceOut');
     });
 }
 
+// notification reject button
 for (let i = 0; i < rejectBtn.length; i++) {
     rejectBtn[i].addEventListener('click', () => {
         activeAppliedContainer[i].classList.add('animate__animated', 'animate__bounceOut');
     });
 }
 
-const pendingBtn = document.querySelector('.pending-btn');
-const acceptedBtn = document.querySelector('.accepted-btn');
-
-const displayApplicationContainerPending = document.querySelector('.display-application-container-pending');
-const displayApplicationContainerAccepted = document.querySelector('.display-application-container-accepted');
-
-pendingBtn.addEventListener('click', () => {
-    console.log("pending button clicked");
-    pendingBtn.style = "background-color: #ffcc00";
-    acceptedBtn.style = "background-color: #44ac67";
-    displayApplicationContainerPending.style = "display: flex";
+// display all aplicant application
+allBtn.addEventListener('click', () => {
+    console.log("all button clicked");
+    allBtn.style = "background-color: #e0e7fd";
+    pendingBtn.style = "background-color: #ebf2fd";
+    acceptedBtn.style = "background-color: #ebf2fd";
+    displayApplicationContainer.style = "display: flex";
+    displayApplicationContainerPending.style = "display: none";
     displayApplicationContainerAccepted.style = "display: none";
 });
 
-acceptedBtn.addEventListener('click', () => {
-    console.log("accepted button clicked");
-    pendingBtn.style = "background-color: #e4bc1c";
-    acceptedBtn.style = "background-color: #36ca67";
-    displayApplicationContainerAccepted.style = "display: flex";
-    displayApplicationContainerPending.style = "display: none";
+// display pending aplicant application
+pendingBtn.addEventListener('click', () => {
+    console.log("pending button clicked");
+    pendingBtn.style = "background-color: #e0e7fd";
+    allBtn.style = "background-color: #ebf2fd";
+    acceptedBtn.style = "background-color: #ebf2fd";
+    displayApplicationContainerPending.style = "display: flex";
+    displayApplicationContainerAccepted.style = "display: none";
+    displayApplicationContainer.style = "display: none";
 });
 
-const assignBtn = document.querySelectorAll('.assign-btn');
+// display accepted aplicant application
+acceptedBtn.addEventListener('click', () => {
+    console.log("accepted button clicked");
+    acceptedBtn.style = "background-color: #e0e7fd";
+    allBtn.style = "background-color: #ebf2fd";
+    pendingBtn.style = "background-color: #ebf2fd";
+    displayApplicationContainerAccepted.style = "display: flex";
+    displayApplicationContainerPending.style = "display: none";
+    displayApplicationContainer.style = "display: none";
+});
 
-for (let i = 0; i < assignBtn.length; i++) {
-    assignBtn[i].addEventListener('click', () => {
+// assign interview button
+for (let i = 0; i < applicationAssignBtn.length; i++) {
+    applicationAssignBtn[i].addEventListener('click', () => {
         console.log("assign button clicked");
-        interviewFormContainer.style = "display: flex";
+        applicationInterviewFormContainer.style = "display: flex";
     });
 }
 
-const editbtn = document.querySelectorAll('.edit-btn');
-
+// edit interview form button
 for (let i = 0; i < editbtn.length; i++) {
     editbtn[i].addEventListener('click', () => {
         console.log("edit button clicked");
         interviewFormContainer.style = "display: flex";
     });
 }
+
+// ajax request to delete company
+const activeJobs = document.querySelector('.active-jobs');
+
+function deleteCompany() {
+    const deleteBtn = document.querySelector('.company-delete-button');
+    console.log("delete button clicked");
+    const id = deleteBtn.getAttribute('data-id');
+    $.ajax({
+        type: 'GET',
+        url: `/admin/delete-job/${id}`,
+        success: function(data) {
+            console.log(data);
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
+    companyMoreInfo.style = "display: none";
+    for (let i = 0; i < activeJob.length; i++) {
+        let jobId = activeJob[i].getAttribute('data-id');
+        if (jobId == id) {
+            activeJob[i].remove();
+            console.log("Company div removed");
+            break;
+        } else {
+            console.log("Company div not found");
+        }
+    }
+}
+
+// ajax request for assign interview form
+// function interviewForm() {
+    // interviewFrom.addEventListener('submit', (e) => {
+    //     e.preventDefault();
+    //     console.log("interview form submitted");
+    //     const id = interviewFrom.getAttribute('interview-id');
+    //     console.log(id);
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: `/admin/assign-interview/${id}`,
+    //         success: function(data) {
+    //             console.log(data);
+    //         },
+    //         error: function(err) {
+    //             console.log(err);
+    //         }
+    //     });
+    // });
+// }
+
+// interviewForm();
+
+
+// ajax request to add company
+function addCompany() {
+    addCompanyForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        console.log("add company form submitted");
+        const data = $(addCompanyForm).serialize();
+        $.ajax({
+            type: 'POST',
+            url: '/admin/create-jobs',
+            data: data,
+            success: function(data) {
+                console.log(data);
+                console.log(data.data.job);
+                const element = document.createElement('div');
+                element.classList.add('active-jobs');
+                element.setAttribute('data-id', data.data.job._id);
+                if (data.data.job.companyImage == "") {
+                    data.data.job.companyImage = "https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg";
+                } else {
+                    data.data.job.companyImage = data.data.job.companyImage;
+                }
+                element.innerHTML = `
+                    <img src="${data.data.job.companyImage}" alt="">
+                    <div class="job-details">
+                    <p><span class="company-more-info-name">${data.data.job.companyName} -</span><span class="company-more-info-location"> ${data.data.job.companylocation}</span></p>
+                        <p>${data.data.job.jobTitle}</p>
+                        <p>${data.data.job.salary}</p>
+                    </div>
+                `;
+                activeJobsContainer.append(element);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+        companyAddFormContainer.style = "display: none";
+        addCompanyForm.reset();
+    });
+}
+
+addCompany();

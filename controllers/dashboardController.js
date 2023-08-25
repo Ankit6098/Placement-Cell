@@ -36,9 +36,10 @@ module.exports.getJobs = async function (req, res) {
 
 // apply jobs
 module.exports.applyJobs = async function (req, res) {
-
   const jobid = req.params.id;
   const job = await Job.findById(jobid);
+
+  console.log("job *****************************");
   
   let companyImage;
   if (job.image == "") {
@@ -47,18 +48,18 @@ module.exports.applyJobs = async function (req, res) {
     companyImage = job.image;
   }
 
-  const interview = Interview.create({
+  const interview = await Interview.create({
       job_id: req.params.id,
       student_id: req.user.id,
       companyImage: companyImage,
-      companyName: job.company,
-      companyLocation: job.location,
+      companyName: job.companyName,
+      companyLocation: job.companylocation,
       companyEmail: job.email,
       companyWebsite: job.website,
-      jobTitle: job.title,
+      jobTitle: job.jobTitle,
       jobSalary: job.salary,
       jobSkills: job.skills,
-      jobDescription: job.description,
+      jobDescription: job.jobDescription,
       studentName: req.user.name,
       studentImage: req.user.avatar,
       studentLastname: req.user.lastname,
@@ -68,15 +69,25 @@ module.exports.applyJobs = async function (req, res) {
     });
     if (interview) {
       // req.flash('success', 'Applied successfully');
-      if (req.xhr) {
-        return res.json(200, {
-          data: {
-            interview: interview,
-          },
-          message: "Applied successfully!",
-        });
+      job.applicantList.push(req.user.id);
+      await job.save();
+      const user = await User.findById(req.user.id);
+      if (user) {
+        user.appliedJobs.push(interview._id);
+        await user.save();
+      } else {
+        console.log("Error in applying");
+        return res.redirect('/dashboard');
       }
-      return res.redirect('/dashboard');
+      // if (req.xhr) {
+      //   return res.json(200, {
+      //     data: {
+      //       interview: interview,
+      //     },
+      //     message: "Applied successfully!",
+      //   });
+      // }
+      // return res.redirect('/dashboard');
     } else {
       // req.flash('error', 'Error in applying');
       return res.redirect('/dashboard');

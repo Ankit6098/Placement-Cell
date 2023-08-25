@@ -115,11 +115,15 @@
             <% } else { %>
                 <div class="display-jobs-container">
                     <% jobs.map((job) => { %>
-                        <div class="active-jobs-container" job-id="<%=job._id%>">
-                            <img src="<%= job.image %>" alt="">
+                        <div class="active-jobs-container" data-id= "<%= job._id %>">
+                            <% if (job.companyImage == "") { %>
+                                <img src="https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg" alt="">
+                            <% } else { %>
+                            <img src="<%= job.companyImage %>" alt="">
+                            <% } %>
                             <div class="job-details">
-                                <p><%= job.company %> - <%= job.location %></p>
-                                <p><%= job.title %></p>
+                                <p><%= job.companyName %> - <span><%= job.companylocation %></span></p>
+                                <p><%= job.jobTitle %></p>
                                 <p><%= job.salary %></p>
                             </div>
                         </div>

@@ -47,6 +47,10 @@ const userSchema = new mongoose.Schema({
     twitter: {
         type: String,
     },
+    appliedJobs: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Job'
+    }],
 }, {
     timestamps: true,
 });
