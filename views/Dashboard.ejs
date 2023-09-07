@@ -43,12 +43,18 @@
         <div class="dashboard-container">
             <div class="students-interviews-container">
                 <div class="interviews-container">
-                    <p>intervies</p>
+                    <img src="/img/undraw_interview_re_e5jn.svg" alt="Interview">
+                    <p>Intervies</p>
                 </div>
             </div>
             <div class="companies-and-other-container">
                 <div class="companies-container">
-                    <p>companies</p>
+                    <img src="/img/undraw_building_re_xfcm.svg" alt="Companies">
+                    <p>Companies</p>
+                </div>
+                <div class="applied-container">
+                    <img src="/img/undraw_notes_re_pxhw.svg" alt="Applied">
+                    <p>Applied</p>
                 </div>
             </div>
         </div>
@@ -68,7 +74,11 @@
                         <div class="active-interview-container" job-id="<%=interview._id%>">
                             <div class="interview-details">
                                 <div class="interview-company-img">
+                                    <% if (interview.companyImage == "") { %>
+                                        <img src="https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg" alt="" srcset="">
+                                    <% } else { %>
                                     <img src="<%= interview.companyImage %>" alt="">
+                                    <% } %>
                                 </div>
                                 <div>
                                     <p><%= interview.companyName %> - <%= interview.companyLocation %></p>
@@ -131,7 +141,7 @@
                 </div>
             <% } %>
             <!-- more info -->
-            <div class="job-more-info-container">
+            <div class="job-more-info-container" student-id="<%= locals.user._id %>">
 
             </div>
         </div>

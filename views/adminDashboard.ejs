@@ -41,6 +41,10 @@
                     event_note
                     </span>applications
                 </li>
+                <a href="/downlaodcsv"><li class="csv-downlaod-li"><span class="material-symbols-outlined">
+                    download
+                    </span>Interview CSV
+                </li></a>
             </ul>
             <div class="theme">
                 <span class="material-symbols-outlined">light_mode</span>
@@ -52,15 +56,22 @@
         <div class="dashboard-container">
             <div class="students-interviews-container">
                 <div class="students-container">
+                    <img src="/img/undraw_experts_re_i40h.svg" alt="">
                     <p>students</p>
                 </div>
                 <div class="interviews-container">
+                    <img src="/img/undraw_interview_re_e5jn.svg" alt="">
                     <p>intervies</p>
                 </div>
             </div>
             <div class="companies-and-other-container">
                 <div class="companies-container">
+                    <img src="/img/undraw_building_re_xfcm.svg" alt="">
                     <p>companies</p>
+                </div>
+                <div class="applied-container">
+                    <img src="/img/undraw_notes_re_pxhw.svg" alt="Applied">
+                    <p>Applied</p>
                 </div>
             </div>
         </div>
@@ -123,7 +134,11 @@
                         <div class="active-interview-container" job-id="<%=interview._id%>">
                             <div class="interview-details">
                                 <div class="interview-company-img">
+                                    <% if (interview.companyImage == "") { %>
+                                        <img src="https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg" alt="" srcset="">
+                                    <% } else { %>
                                     <img src="<%= interview.companyImage %>" alt="">
+                                    <% } %>
                                 </div>
                                 <div>
                                     <p><%= interview.companyName %> - <%= interview.companyLocation %></p>
@@ -137,39 +152,8 @@
                                 <p><%= interview.date %>  <%= interview.time %></p>
                             </div>
                             <div class="interview-action-buttons">
-                                <button class="edit-btn"><i class="fa-solid fa-pencil"></i></button>
+                                <button class="edit-btn" interview-id="<%= interview._id %>"><i class="fa-solid fa-pencil"></i></button>
                             </div>
-                        </div>
-                        <div class="interview-form-container">
-                            <form action="/admin/assign-interview/<%= interview._id %>" interview-id="interview._id" method="post" id="interview-form">
-                                <div class="input-container">
-                                    <label for="date">Date : </label>
-                                    <input type="date" name="date" required>
-                                </div>
-                                <div class="input-container">
-                                    <label for="time">Time : </label>
-                                    <input type="time" name="time">
-                                </div>
-                                <div class="input-container">
-                                    <label for="interview-mode">Interview Mode : </label>
-                                    <select name="interviewMode" id="">
-                                        <option value="online">Online</option>
-                                        <option value="offline">Offline</option>
-                                    </select>
-                                </div>
-                                <div class="input-container">
-                                    <label for="status">Status : </label>
-                                    <select name="interviewStatus" id="" required>
-                                        <option value="pending">Pending</option>
-                                        <option value="accepted">Accepted</option>
-                                        <option value="rejected">Rejected</option>
-                                    </select>
-                                </div>
-                                <div class="submit-btn">
-                                    <button type="submit">Submit</button>
-                                </div>
-                                <i class="fa-solid fa-xmark container-close-btn" onclick="closeContainerbtn()"></i>
-                            </form>
                         </div>
                     <% } %>
                 <% }) %>
@@ -281,12 +265,12 @@
             </div>
 
             <!-- display active jobs -->
-            <% if (jobs.length == 0) { %>
-                <div class="no-found">
+
+                <div class="no-found" id="no-found">
                     <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script><lottie-player src='https://lottie.host/f135a538-9be5-4487-b2da-7f49b93e8dbf/Y22iaG84qI.json' background='transparent' speed='1' style='width: 300px; height: 300px' loop autoplay direction='1' mode='normal'></lottie-player>
                     <p>No Jobs found</p>
                 </div>
-            <% } else { %>
+           
                 <div class="active-jobs-container">
                     <% jobs.map((job) => { %>
                         <div class="active-jobs" data-id= "<%= job._id %>">
@@ -303,7 +287,7 @@
                         </div>
                     <% }) %>
                 </div>
-            <% } %>
+ 
         </div>
 
         <!-- application -->
@@ -312,9 +296,9 @@
             <div class="heading">
                 <h2>Applied Jobs</h2>
                 <heading class="buttons">
-                    <button class="all-btn">All</button>
                     <button class="pending-btn">pending</button>
                     <button class="accepted-btn">accepted</button>
+                    <button class="rejected-btn">Rejected</button>
                 </heading>
             </div>
             <!-- active applied -->
@@ -350,7 +334,7 @@
                     </div>
                 <% } %>
             </div>
-            <div class="display-application-container">
+            <div class="display-application-container-rejected">
                 <% if (interviews.length == 0) { %>
                     <div class="no-found">
                         <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script><lottie-player src='https://lottie.host/f135a538-9be5-4487-b2da-7f49b93e8dbf/Y22iaG84qI.json' background='transparent' speed='1' style='width: 300px; height: 300px' loop autoplay direction='1' mode='normal'></lottie-player>
@@ -358,24 +342,22 @@
                     </div>
                 <% } %>
                 <% interviews.map((interview) => { %>
-                    <div class="active-application-container" job-id="<%=interview._id%>">
-                        <div class="application-details">
-                            <div class="application-company-img">
-                                <img src="<%= interview.companyImage %>" alt="">
+                    <% if (interview.appliedStatus == "Rejected") { %>
+                        <div class="active-application-container" job-id="<%=interview._id%>">
+                            <div class="application-details">
+                                <div class="application-company-img">
+                                    <img src="<%= interview.companyImage %>" alt="">
+                                </div>
+                                <div>
+                                    <p><%= interview.companyName %> - <%= interview.companyLocation %></p>
+                                    <div><%= interview.jobTitle %></div>
+                                </div>
                             </div>
-                            <div>
-                                <p><%= interview.companyName %> - <%= interview.companyLocation %></p>
-                                <div><%= interview.jobTitle %></div>
+                            <div class="application-job-aplicant">
+                                <p><%= interview.studentName %></p>
                             </div>
                         </div>
-                        <div class="application-job-aplicant">
-                            <p><%= interview.studentName %></p>
-                        </div>
-                        <div class="applied-action-buttons">
-                            <a href="admin/accept-apllied-jobs-notification/<%= interview._id %>"><button class="accept-btn"><i class="fa-solid fa-check"></i></button></a>
-                            <a href="admin/reject-apllied-jobs-notification/<%= interview._id %>"><button class="reject-btn"><i class="fa-solid fa-xmark"></i></button></a>
-                        </div>
-                    </div>
+                    <% } %>
                 <% }) %>
             </div>
             <div class="display-application-container-accepted">
@@ -397,43 +379,13 @@
                             </div>
                             <% if (interview.accepted == false) { %>
                                 <div class="assign-interview">
-                                    <button class="application-assign-btn">Assign interview</button>
+                                    <button class="application-assign-btn" interview-id="<%= interview._id %>">Assign interview</button>
                                 </div>
                             <% } else { %>
                                 <div class="date-time">
                                     <p><%= interview.date %>  <%= interview.time %></p>
                                 </div>
                             <% } %>
-                        </div>
-                        <!-- form -->
-                        <div class="application-interview-form-container">
-                            <form action="/admin/assign-interview/<%= interview._id %>" interview-id="<%= interview._id %>" method="post" id="interview-form">
-                                <div class="input-container">
-                                    <label for="date">Date : </label>
-                                    <input type="date" name="date" required>
-                                </div>
-                                <div class="input-container">
-                                    <label for="time">Time : </label>
-                                    <input type="time" name="time">
-                                </div>
-                                <div class="input-container">
-                                    <label for="interview-mode">Interview Mode : </label>
-                                    <select name="interviewMode" id="">
-                                        <option value="Online">Online</option>
-                                        <option value="Offline">Offline</option>
-                                    </select>
-                                </div>
-                                <div class="input-container">
-                                    <label for="status">Status : </label>
-                                    <select name="interviewStatus" id="" required>
-                                        <option value="pending">Pending</option>
-                                        <option value="accepted">Accepted</option>
-                                        <option value="rejected">Rejected</option>
-                                    </select>
-                                </div>
-                                <button>Submit</button>
-                                <i class="fa-solid fa-xmark container-close-btn" onclick="closeContainerbtn()"></i>
-                            </form>
                         </div>
                     <% } %>
                 <% }) %>
@@ -448,9 +400,9 @@
                       
         <!-- right aside container -->
         <div class="right-aside-container">
-            <div class="reminder-container">
+            <!-- <div class="reminder-container">
                 <p>remainder</p>
-            </div>
+            </div> -->
             <div class="notification-container">
                 <% let notificationCount = 0; %>
                 <% for (let i = 0; i < interviews.length; i++) { %>
@@ -470,17 +422,53 @@
                                 <p><%= interviews[i].studentName %></p>
                             </div>
                             <div class="applied-action-buttons">
-                                <a href="admin/accept-apllied-jobs-notification/<%= interviews[i]._id %>"><button class="accept-btn"><i class="fa-solid fa-check"></i></button></a>
-                                <a href="admin/reject-apllied-jobs-notification/<%= interviews[i]._id %>"><button class="reject-btn"><i class="fa-solid fa-xmark"></i></button></a>
+                                <!-- <a href="admin/accept-apllied-jobs-notification/<%= interviews[i]._id %>"><button class="accept-btn"><i class="fa-solid fa-check"></i></button></a> -->
+                                <button class="accept-btn" interview-id="<%= interviews[i]._id %>"><i class="fa-solid fa-check"></i></button>
+                                <!-- <a href="admin/reject-apllied-jobs-notification/<%= interviews[i]._id %>"><button class="reject-btn"><i class="fa-solid fa-xmark"></i></button></a> -->
+                                <button class="reject-btn" interview-id="<%= interviews[i]._id %>"><i class="fa-solid fa-xmark"></i></button>
                             </div>
                         </div>
                     <% } %>
-                    <% if (notificationCount == 3) { %>
-                        <% break %>
-                    <% } %>
+                <% } %>
+                <% if (notificationCount == 0) { %>
+                    <div class="no-found">
+                        <p>No Notification</p>
+                    </div>
                 <% } %>
             </div>
         </div>
+    </div>
+
+    <div class="interview-form-container">
+        <form action=""  method="post" id="interview-form">
+            <div class="input-container">
+                <label for="date">Date : </label>
+                <input type="date" name="date" required>
+            </div>
+            <div class="input-container">
+                <label for="time">Time : </label>
+                <input type="time" name="time">
+            </div>
+            <div class="input-container">
+                <label for="interview-mode">Interview Mode : </label>
+                <select name="interviewMode" id="">
+                    <option value="online">Online</option>
+                    <option value="offline">Offline</option>
+                </select>
+            </div>
+            <div class="input-container">
+                <label for="status">Status : </label>
+                <select name="interviewStatus" id="" required>
+                    <option value="pending">Pending</option>
+                    <option value="accepted">Accepted</option>
+                    <option value="rejected">Rejected</option>
+                </select>
+            </div>
+            <div class="submit-btn">
+                <button type="submit">Submit</button>
+            </div>
+            <i class="fa-solid fa-xmark container-close-btn" onclick="closeContainerbtn()"></i>
+        </form>
     </div>
 
     <script src="/js/adminDashboard.js"></script>

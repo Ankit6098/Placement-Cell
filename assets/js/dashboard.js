@@ -10,6 +10,46 @@ const interviewContainer = document.querySelector('.interviews-main-container');
 const companiesContainer = document.querySelector('.companies-main-container');
 const appliedJobsContainer = document.querySelector('.appliedJobs-main-container');
 
+const dashboardInterviewsContainer = document.querySelector('.interviews-container');
+const dashboardCompaniesContainer = document.querySelector('.companies-container');
+const dashbaordAppliedContainer = document.querySelector('.applied-container');
+
+dashboardInterviewsContainer.addEventListener('click', () => {
+    interview.style = "background-color: #ebf2fd";
+    dashboard.style = "background-color: none";
+    companies.style = "background-color: none";
+    interviewContainer.style = "display: flex";
+    dashboardContainer.style = "display: none";
+    studentContainer.style = "display: none";
+    jobsContainer.style = "display: none";
+    applicationContainer.style = "display: none";
+    application.style = "background-color: none";
+});
+
+dashboardCompaniesContainer.addEventListener('click', () => {
+    companies.style = "background-color: #ebf2fd";
+    dashboard.style = "background-color: none";
+    interview.style = "background-color: none";
+    application.style = "background-color: none";
+    jobsContainer.style = "display: flex";
+    dashboardContainer.style = "display: none";
+    studentContainer.style = "display: none";
+    interviewContainer.style = "display: none";
+    applicationContainer.style = "display: none";
+});
+
+dashbaordAppliedContainer.addEventListener('click', () => {
+    application.style = "background-color: #ebf2fd";
+    dashboard.style = "background-color: none";
+    interview.style = "background-color: none";
+    companies.style = "background-color: none";
+    applicationContainer.style = "display: flex";
+    dashboardContainer.style = "display: none";
+    studentContainer.style = "display: none";
+    interviewContainer.style = "display: none";
+    jobsContainer.style = "display: none";
+});
+
 dashboard.style = "background-color: #ebf2fd";
 
 dashboard.addEventListener('click', () => {
@@ -77,12 +117,12 @@ for (let i = 0; i < activeJob.length; i++) {
 
 function renderJobs(jobs) {
     jobMoreInfoContainer.innerHTML = '';
+    const studentId = jobMoreInfoContainer.getAttribute('student-id');
     if (jobs.companyImage == "") {
         jobs.companyImage = "https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg";
     } else {
         jobs.companyImage = jobs.companyImage;
     }
-    
     
     const element = document.createElement('div');
     element.classList.add('company-more-info');
@@ -113,17 +153,18 @@ function renderJobs(jobs) {
         
         <i onclick="closeContainerbtn()" class="fa-solid fa-xmark container-close-btn"></i>
     `;
+    jobMoreInfoContainer.appendChild(element);
     console.log(jobs.applicantList);
     for (let i = 0; i < jobs.applicantList.length; i++) {
         console.log("applicant list", jobs.applicantList[i]);
-        if (jobs.applicantList[i] == jobs.applicantList[i]) {
+        if (jobs.applicantList[i] == studentId) {
             const applyJobsRequest = document.querySelector('.company-more-info-details-apply-btn');
             console.log("user already applied for this job");
+            applyJobsRequest.disabled = true;
             applyJobsRequest.style = "cursor: not-allowed;";
             applyJobsRequest.innerHTML = "Applied";
         }
     }
-    jobMoreInfoContainer.appendChild(element);
 }
 
 
@@ -142,6 +183,7 @@ function closeContainerbtn() {
 function applyJobs() {
     const applyJobsRequest = document.querySelector('.company-more-info-details-apply-btn');
     console.log("apply job button clicked");
+    applyJobsRequest.disabled = true;
     applyJobsRequest.style = "cursor: not-allowed;";
     applyJobsRequest.innerHTML = "Applied";
     const id = applyJobsRequest.getAttribute('job-id');

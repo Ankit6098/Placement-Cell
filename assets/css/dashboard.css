@@ -114,8 +114,17 @@ body {
     border-radius: 30px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
+}
+
+.interviews-container img {
+    width: 50%;
+    height: 50%;
+    border-radius: 30px;
+    object-fit: cover;
 }
 
 .companies-container {
@@ -125,8 +134,37 @@ body {
     border-radius: 30px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
+}
+
+.companies-container img {
+    width: 50%;
+    height: 50%;
+    border-radius: 30px;
+    object-fit: cover;
+}
+
+.applied-container {
+    width: 25%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.applied-container img {
+    width: 50%;
+    height: 50%;
+    border-radius: 30px;
+    object-fit: cover;
 }
 
 .right-aside-container {
@@ -480,6 +518,7 @@ body {
     /* justify-content: center; */
     align-items: center;
     gap: 1rem;
+    font-size: 0.8rem;
 }
 
 .active-applied-container img {

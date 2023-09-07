@@ -51,7 +51,7 @@ module.exports.applyJobs = async function (req, res) {
   const interview = await Interview.create({
       job_id: req.params.id,
       student_id: req.user.id,
-      companyImage: companyImage,
+      companyImage: job.companyImage,
       companyName: job.companyName,
       companyLocation: job.companylocation,
       companyEmail: job.email,
@@ -79,15 +79,15 @@ module.exports.applyJobs = async function (req, res) {
         console.log("Error in applying");
         return res.redirect('/dashboard');
       }
-      // if (req.xhr) {
-      //   return res.json(200, {
-      //     data: {
-      //       interview: interview,
-      //     },
-      //     message: "Applied successfully!",
-      //   });
-      // }
-      // return res.redirect('/dashboard');
+        // if (req.xhr) {
+        //   return res.json(200, {
+        //     data: {
+        //       interview: interview,
+        //     },
+        //     message: "Applied successfully!",
+        //   });
+        // }
+      return res.redirect('/dashboard');
     } else {
       // req.flash('error', 'Error in applying');
       return res.redirect('/dashboard');

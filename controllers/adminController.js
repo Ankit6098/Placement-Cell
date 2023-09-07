@@ -48,15 +48,16 @@ module.exports.createJobs = async function(req, res) {
 
 // assign interview
 module.exports.assignInterview = async function(req, res) {
-    const interview = await Interview.findById(req.params.id);
+    const interview = await Interview.findByIdAndUpdate(req.params.id);
     if (interview) {
-        console.log("interview found");
         interview.date = req.body.date;
         interview.time = req.body.time;
         interview.interviewMode = req.body.interviewMode;
         interview.interviewStatus = req.body.interviewStatus;
         interview.accepted = true;
+        console.log(req.body);        
         await interview.save();
+
         if (req.xhr) {
             return res.json(200, {
               data: {

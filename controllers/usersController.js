@@ -9,6 +9,7 @@ module.exports.signinsignout = async function(req, res) {
       }
       return res.render('signin-signout', {
         title: 'Sign In | Sign Up',
+        
       });
     } catch (err) {
       console.log('Error', err);

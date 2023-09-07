@@ -6,6 +6,7 @@ const usersController = require('../controllers/usersController');
 const dashboardController = require('../controllers/dashboardController');
 const adminController = require('../controllers/adminController');
 const userEditProfileController = require('../controllers/userEditProfileController');
+const csvDownlaodController = require('../controllers/csvDownloadeController');
 
 router.get('/', welcomeController.welcome);
 router.get('/authentication', usersController.signinsignout);
@@ -14,5 +15,7 @@ router.use('/user' , require('./signin-signout'));
 router.use('/dashboard' , require('./dashboard'));
 router.get('/userEditProfile', userEditProfileController.userEditProfile);
 router.post('/userUpdateProfile', userEditProfileController.userUpdateProfile);
+
+router.get('/downlaodcsv', csvDownlaodController.csvDownlaod);
 
 module.exports = router;

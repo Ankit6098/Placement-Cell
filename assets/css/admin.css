@@ -114,8 +114,18 @@ body {
     border-radius: 30px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.students-container img {
+    width: 50%;
+    height: 50%;
+    object-fit: contain;
+    border-radius: 30px;
 }
 
 .interviews-container {
@@ -125,8 +135,18 @@ body {
     border-radius: 30px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.interviews-container img {
+    width: 50%;
+    height: 50%;
+    object-fit: contain;
+    border-radius: 30px;
 }
 
 .companies-container {
@@ -136,8 +156,18 @@ body {
     border-radius: 30px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.companies-container img {
+    width: 50%;
+    height: 50%;
+    object-fit: contain;
+    border-radius: 30px;
 }
 
 .right-aside-container {
@@ -228,6 +258,26 @@ body {
     border-radius: 20px;
 }
 
+.applied-container {
+    width: 25%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.applied-container img {
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+    border-radius: 20px;
+}
 
 .job-details {
     margin-top: 10px;
@@ -652,20 +702,21 @@ body {
 
 .notification-container {
     width: 100%;
-    height: 55%;
+    height: 100%;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: center;
+    padding: 20px 0px;
     gap: 1rem;
-    /* background-color: #e0e7fd;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .active-applied-container {
     width: 90%;
-    height: 20%;
+    height: 80px;
     border-radius: 20px;
     /* display: flex;
     justify-content: center;
@@ -675,7 +726,7 @@ body {
     grid-template-columns: 3fr 2fr 1fr;
     gap: 0.5rem;
     place-items: center start;
-    background-color: #e0e7fd;
+    background-color: #ebf2fd;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     font-size: 0.8rem;
     cursor: pointer;
@@ -758,7 +809,6 @@ body {
     align-items: center;
     overflow: hidden;
     overflow-y: scroll;
-    display: none;
 }
 
 .display-application-container-pending::-webkit-scrollbar {
@@ -782,7 +832,7 @@ body {
     display: none;
 }
 
-.display-application-container {
+.display-application-container-rejected {
     width: 100%;
     height: 80%;
     display: flex;
@@ -792,14 +842,32 @@ body {
     align-items: center;
     overflow: hidden;
     overflow-y: scroll;
+    display: none;
 }
 
-.display-application-container::-webkit-scrollbar {
+.display-application-container-rejected .active-application-container {
+    width: 40%;
+    height: auto;
+    border-radius: 30px;
+    display: grid;
+    padding: 20px 30px;
+    grid-template-columns: 3fr 2fr;
+    gap: 0.5rem;
+    place-items: center start;
+    background-color: #e0e7fd;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.display-application-container-rejected::-webkit-scrollbar {
     display: none;
 }
 
 .application-interview-form-container {
-    width: 24%;
+    width: 20%;
     background-color: #fff;
     display: flex;
     flex-direction: column;
@@ -816,13 +884,47 @@ body {
     display: none;
 }
 
-.active-application-container {
-    width: 70%;
-    height: auto;
-    border-radius: 20px;
-    /* display: flex;
+.application-interview-form-container form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     justify-content: center;
-    align-items: center; */
+    align-items: center;
+}
+
+.application-interview-form-container form .input-container select {
+    width: 90%;
+    height: 100%;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    padding: 13px 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    background-color: #ebf2fd;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+.application-interview-form-container form button {
+    width: 100px;
+    height: 40px;
+    border-radius: 15px;
+    background-color: #43bdd3;
+    border: none;
+    cursor: pointer;
+    font-size: 0.7rem;
+    transition: all 0.3s ease-in-out;
+    font-weight: 600;
+    margin: 0 auto;
+    color: white;
+}
+
+.active-application-container {
+    width: 60%;
+    height: auto;
+    border-radius: 30px;
     display: grid;
     padding: 20px 30px;
     grid-template-columns: 3fr 2fr 1fr;
@@ -856,7 +958,7 @@ body {
     width: 90px;
     height: 35px;
     border-radius: 12px;
-    background-color: #ebf2fd;
+    background-color: #e0e7fd;
     border: none;
     cursor: pointer;
     font-size: 0.7rem;
@@ -878,11 +980,11 @@ body {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.all-btn {
+.rejected-btn {
     width: 90px;
     height: 35px;
     border-radius: 12px;
-    background-color: #e0e7fd;
+    background-color: #ebf2fd;
     border: none;
     cursor: pointer;
     font-size: 0.7rem;
@@ -908,6 +1010,10 @@ body {
     background-color: #ebf2fd;
     border-radius: 10px;
     padding: 10px;
+}
+
+.input-container label {
+    width: 30%;
 }
 
 .input-container span {
