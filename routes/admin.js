@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const checkAdmin = require('../config/isAdmin')
 
 const adminController = require('../controllers/adminController');
+// const { isAdmin } = require('../config/isAdmin');
 
 // render admin dashboard
-router.get('/', adminController.getAdmin);
+router.get('/', checkAdmin.isAdmin, adminController.getAdmin);
 
 // render admin login page
 router.post('/create-admin', adminController.createAdmin);

@@ -89,7 +89,7 @@
             </div>
 
             <!-- all students -->
-            <% if (students.length == 0) { %>
+            <% if (students && students.length == 0) { %>
                 <div class="no-found">
                     <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script><lottie-player src='https://lottie.host/f135a538-9be5-4487-b2da-7f49b93e8dbf/Y22iaG84qI.json' background='transparent' speed='1' style='width: 300px; height: 300px' loop autoplay direction='1' mode='normal'></lottie-player>
                     <p>No Student found</p>

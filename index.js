@@ -27,13 +27,28 @@ app.set('views', path.join(__dirname, 'views'));
 // setup the static files
 app.use(express.static('assets'));
 
-// mongo store is used to store the session cookie in the db
+// mongo store is used to store the session cookie of user in the db
 app.use(session({
     name: 'placement cell',
     // TODO change the secret before deployment in production mode
     secret: "someting",
     saveUninitialized: false,
     resave: false,
+    cookie: {
+        maxAge: (1000 * 60 * 1000)
+    },
+    store: MongoStore.create({
+        mongoUrl: process.env.mongoDbUrl,
+        autoRemove: 'disabled'
+    })
+}));
+
+// store admin sesssion in mongo store
+app.use(session({
+    name: 'placement cell',
+    secret: 'something',
+    resave: false,
+    saveUninitialized: true,
     cookie: {
         maxAge: (1000 * 60 * 1000)
     },

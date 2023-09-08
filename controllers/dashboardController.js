@@ -9,6 +9,7 @@ module.exports.dashboard = async function (req, res) {
   const interviews = await Interview.find();
   res.render("Dashboard", { 
     title: "Dashboard", 
+    username: "admin",
     users: users, 
     jobs: jobs,
     interviews: interviews
