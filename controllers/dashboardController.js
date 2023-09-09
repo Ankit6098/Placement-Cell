@@ -9,7 +9,7 @@ module.exports.dashboard = async function (req, res) {
   const interviews = await Interview.find();
   res.render("Dashboard", { 
     title: "Dashboard", 
-    username: "admin",
+    isAdmin: req.session.isAdmin || false,
     users: users, 
     jobs: jobs,
     interviews: interviews

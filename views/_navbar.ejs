@@ -9,13 +9,13 @@
         <div class="logo">
             <h4>Placebuddy</h4>
         </div>
-        <% if(!locals.user && username !== 'admin'){ %>
+        <% if(!locals.user && !isAdmin){ %>
             <div class="nav-login">
                 <a href="/authentication"><button class="nav-login-btn">Login</button></a>
             </div>
         <% } else { %>
         <div class="nav-login">
-            <% if (username == "admin") { %>
+            <% if (isAdmin) { %>
                 <!-- admin -->
                 <div class="admin-img">
                     <img src="   https://cdn-icons-png.flaticon.com/512/2202/2202112.png " alt="">
@@ -25,6 +25,7 @@
                         <img src="   https://cdn-icons-png.flaticon.com/512/2202/2202112.png " alt="">
                         <div class="user-name">
                             <h3>Admin</h3>
+                            <span>--</span>
                         </div>
                     </div>
                     <div class="user-action">
@@ -34,7 +35,7 @@
                         </a>
                     </div>
                     <div class="user-logout-btn">
-                        <a href="/"><button class="nav-login-btn">Logout</button></a>
+                        <a href="/admin/destroy-session"><button class="nav-login-btn">Logout</button></a>
                     </div>
                 </div>
             <% } else { %>

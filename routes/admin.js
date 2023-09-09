@@ -11,6 +11,9 @@ router.get('/', checkAdmin.isAdmin, adminController.getAdmin);
 // render admin login page
 router.post('/create-admin', adminController.createAdmin);
 
+// destroy session and logout
+router.get('/destroy-session', adminController.destroySession);
+
 // create jobs
 router.post('/create-jobs', adminController.createJobs);
 

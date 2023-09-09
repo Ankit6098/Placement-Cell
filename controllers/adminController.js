@@ -9,7 +9,7 @@ module.exports.getAdmin = async function (req, res) {
   const interviews = await Interview.find();
   return res.render("adminDashboard", {
     title: "Admin Dashboard",
-    username: "admin",
+    isAdmin: req.session.isAdmin || false,
     students: students,
     jobs: jobs,
     interviews: interviews,
@@ -36,9 +36,18 @@ module.exports.createAdmin = async function (req, res) {
 
     if (req.body.username == "admin" && req.body.password == "admin") {
         req.session.isAdmin = true;
-        res.send('admin logged in successfully')
+        const students = await User.find();
+        const jobs = await Job.find();
+        const interviews = await Interview.find();
+        console.log("admin logged in successfully");
+        return res.render("adminDashboard.ejs", {
+        isAdmin: req.session.isAdmin || false,
+        students: students,
+        jobs: jobs,
+        interviews: interviews,
+        });
     } else {
-        res.send('invalid credentials')
+        return res.redirect('back');
     }
 };
 
