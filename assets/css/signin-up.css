@@ -35,36 +35,107 @@ body {
     border-radius: 30px;
 }
 
+.admin-form-container {
+    width: 350px;
+    height: 450px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2), -5px -5px 10px #fafbfe;
+    border-radius: 30px;
+}
+
 .user-admin-option {
-    width: 500px;
-    height: 200px;
+    width: 330px;
+    height: 450px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 2rem;
+    border-radius: 20px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+
+.user-admin-option h3 {
+    width: 80%;
+    float: left;
+}
+
+.user-admin-option p {
+    font-size: 0.8rem;
+}
+
+.toggle-admin {
+    color: #21587e;
+    cursor: pointer;
+    font-weight: 600;
+}
+.toggle-user {
+    color: #21587e;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.admin {
+    display: none;
+}
+
+.option-container {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.option-container button {
+    width: 35px;
+    height: 35px;
+    border: none;
+    background-color: #409ad6;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.option-container button i {
+    color: white;
 }
 
 .user-option {
-    width: 50%;
-    height: 100%;
+    width: 70%;
+    height: 70%;
     display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     justify-content: center;
     align-items: center;
     background-color: #ebf2fd;
     border-radius: 30px;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
-    cursor: pointer;
+    /* box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px; */
+}
+
+.user-option img {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(5px 5px 10px rgb(110, 110, 110));
 }
 
 .admin-option {
-    width: 50%;
-    height: 100%;
+    width: 70%;
+    height: 70%;
     display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     justify-content: center;
     align-items: center;
     border-radius: 30px;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
-    cursor: pointer;
+    /* box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px; */
+}
+
+.admin-option img {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(5px 5px 10px rgb(110, 110, 110));
 }
 
 .admin-login {

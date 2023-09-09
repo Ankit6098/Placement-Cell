@@ -43,21 +43,6 @@ app.use(session({
     })
 }));
 
-// store admin sesssion in mongo store
-app.use(session({
-    name: 'placement cell',
-    secret: 'something',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        maxAge: (1000 * 60 * 1000)
-    },
-    store: MongoStore.create({
-        mongoUrl: process.env.mongoDbUrl,
-        autoRemove: 'disabled'
-    })
-}));
-
 // set up passport
 app.use(passport.initialize())
 app.use(passport.session())

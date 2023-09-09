@@ -8,8 +8,34 @@ const signInPage = document.querySelector('.sign-in-container');
 const adminLogin = document.querySelector('.admin-login-container');
 
 const userAdminOption = document.querySelector('.user-admin-option');
-const userOption = document.querySelector('.user-option');
-const adminOption = document.querySelector('.admin-option');
+const userOption = document.querySelector('.user-option-button');
+const adminOption = document.querySelector('.admin-option-button');
+
+const user = document.querySelector('.user');
+const admin = document.querySelector('.admin');
+const toggleAdmin = document.querySelector(".toggle-admin");
+const toggleUser = document.querySelector('.toggle-user');
+
+toggleUser.addEventListener('click', () => {
+    console.log("user click");
+    user.classList.remove('animate__bounceIn');
+    user.classList.add('animate__flipInY');
+    admin.classList.remove('animate__bounceIn');
+    admin.classList.add('animate__flipInY');
+    admin.style.display ='none';
+    user.style.display ="flex";
+})
+
+toggleAdmin.addEventListener('click', () => {
+    console.log("admin click");
+    user.classList.remove('animate__bounceIn');
+    user.classList.add('animate__flipInY');
+    admin.classList.remove('animate__bounceIn');
+    admin.classList.add('animate__flipInY');
+    admin.style.display ="flex";
+    user.style.display ='none';
+
+})
 
 userOption.addEventListener('click', () => {
     console.log('userOption clicked');
@@ -20,7 +46,7 @@ userOption.addEventListener('click', () => {
 adminOption.addEventListener('click', () => {
     console.log('adminOption clicked');
     adminLogin.style.display = 'flex';
-    userAdminOption.style.display = 'none';
+    admin.style.display = 'none';
 });
 
 toggleSignUpPage.addEventListener('click', () => {
@@ -84,3 +110,5 @@ showConfirmPassword.addEventListener('click', () => {
     }
     }
 );
+
+

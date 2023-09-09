@@ -17,13 +17,28 @@
         </a>
     </div>
 
-    <div class="user-admin-option animate__animated animate__bounceIn">
-        <div class="user-option">
-            <p>user</p>
+    <div class="user-admin-option user animate__animated animate__bounceIn">
+        <h3>Login as User</h3>
+        <div class="option-container">
+            <div class="user-option">
+                <img src="/img/user.svg" alt="">
+                <!-- <p>user</p> -->
+            </div>
+            <button class="user-option-button"><i class="fa-solid fa-arrow-right"></i></button>
         </div>
-        <div class="admin-option">
-            <p>admin</p>
+        <p>Login as <span class="toggle-admin">Admin</span> ?</p>
+    </div>
+
+    <div class="user-admin-option admin animate__animated animate__bounceIn">
+        <h3>Login as Admin</h3>
+        <div class="option-container">
+            <div class="admin-option">
+                <img src="/img/admin.svg" alt="">
+                <!-- <p>admin</p> -->
+            </div>
+            <button class="admin-option-button"><i class="fa-solid fa-arrow-right"></i></button>
         </div>
+        <p>Login as <span class="toggle-user">User</span> ?</p>
     </div>
 
     <div class="sign-in-container animate__animated animate__fadeInLeft">
@@ -101,7 +116,7 @@
     </div>
     
     <div class="admin-login-container admin-login">
-        <form action="/admin/create-admin" method="post" class="form-container">
+        <form action="/admin/create-admin" method="post" class="admin-form-container">
             <div class="form-heading">
                 <h1>Login</h1>
                 <h1 class="last-h1">Welcome Admin</h1>
@@ -116,15 +131,6 @@
                 <i class="fa-solid fa-eye show-password"></i>
             </div>
             <input type="submit" value="Sign In" class="sign-in-btn">
-            <div class="divider">
-                <div class="line-left"></div>
-                <p>Or</p>
-                <div class="line-right"></div>
-            </div>
-            <div class="other-login-method-container">
-                <a href="/user/auth/google"><img src="   https://cdn-icons-png.flaticon.com/512/281/281764.png " alt="" width="20px" height="20px"></a>
-                <a href="/user/auth/github"><img src="   https://cdn-icons-png.flaticon.com/512/733/733553.png " alt="" width="20px" height="20px"></a>
-            </div>
         </form>
     </div>
 
