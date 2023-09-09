@@ -34,18 +34,25 @@ module.exports.createAdmin = async function (req, res) {
 //     return res.redirect("back");
 //   }
 
+    // if (req.body.username == "admin" && req.body.password == "admin") {
+    //     req.session.isAdmin = true;
+    //     const students = await User.find();
+    //     const jobs = await Job.find();
+    //     const interviews = await Interview.find();
+    //     console.log("admin logged in successfully");
+    //     return res.render("adminDashboard.ejs", {
+    //     isAdmin: req.session.isAdmin || false,
+    //     students: students,
+    //     jobs: jobs,
+    //     interviews: interviews,
+    //     });
+    // } else {
+    //     return res.redirect('back');
+    // }
+
     if (req.body.username == "admin" && req.body.password == "admin") {
         req.session.isAdmin = true;
-        const students = await User.find();
-        const jobs = await Job.find();
-        const interviews = await Interview.find();
-        console.log("admin logged in successfully");
-        return res.render("adminDashboard.ejs", {
-        isAdmin: req.session.isAdmin || false,
-        students: students,
-        jobs: jobs,
-        interviews: interviews,
-        });
+        return res.redirect('/admin');
     } else {
         return res.redirect('back');
     }
