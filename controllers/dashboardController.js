@@ -10,7 +10,7 @@ module.exports.dashboard = async function (req, res) {
   res.render("Dashboard", { 
     title: "Dashboard", 
     isAdmin: req.session.isAdmin || false,
-    users: users, 
+    users: users,
     jobs: jobs,
     interviews: interviews
   });
@@ -40,8 +40,6 @@ module.exports.applyJobs = async function (req, res) {
   const jobid = req.params.id;
   const job = await Job.findById(jobid);
 
-  console.log("job *****************************");
-  
   let companyImage;
   if (job.image == "") {
     companyImage = "https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg"
@@ -69,28 +67,21 @@ module.exports.applyJobs = async function (req, res) {
       studentPhone: req.user.phone,
     });
     if (interview) {
-      // req.flash('success', 'Applied successfully');
       job.applicantList.push(req.user.id);
       await job.save();
+      req.flash('success', 'Applied successfully');
       const user = await User.findById(req.user.id);
       if (user) {
         user.appliedJobs.push(interview._id);
         await user.save();
       } else {
         console.log("Error in applying");
+        req.flsh('info', 'Error in Applying')
         return res.redirect('/dashboard');
       }
-        // if (req.xhr) {
-        //   return res.json(200, {
-        //     data: {
-        //       interview: interview,
-        //     },
-        //     message: "Applied successfully!",
-        //   });
-        // }
       return res.redirect('/dashboard');
     } else {
-      // req.flash('error', 'Error in applying');
+      req.flash('error', 'Error in applying');
       return res.redirect('/dashboard');
     }
 }

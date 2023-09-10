@@ -64,6 +64,7 @@ module.exports.destroySession = function (req, res) {
         if (err) {
             console.log(err);
         }
+        req.flash('success', "Log Out")
         res.redirect('/');
     }
 )}
@@ -81,9 +82,11 @@ module.exports.createJobs = async function (req, res) {
         message: "Job created successfully!",
       });
     }
+    req.flash('success', 'Job Created Successfully');
     return res.redirect("back");
   } else {
     console.log("error in creating job");
+    req.flash('error', 'Rrror in Creating Job');
     return res.redirect("back");
   }
 };
@@ -109,9 +112,11 @@ module.exports.assignInterview = async function (req, res) {
       });
     }
     console.log("interview assigned successfully");
+    req.flash('success', 'Interview Assigned Successfully')
     return res.redirect("back");
   } else {
     console.log("error in assigning interview");
+    req.flash('error', 'Error in Assigning Interview')
     return res.redirect("back");
   }
 };
@@ -159,9 +164,11 @@ module.exports.deleteJob = async function (req, res) {
   const id = req.params.id;
   try {
     const job = await Job.findByIdAndDelete(id);
+    req.flash('success', 'Job Deleted Successfully')
     return res.redirect("back");
   } catch (err) {
     console.log(err);
+    req.flash('error', 'Error in Deleting Job')
     return res.redirect("back");
   }
 };

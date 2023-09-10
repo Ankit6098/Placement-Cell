@@ -19,6 +19,8 @@ const passportGithub = require('./config/passport-github2-strategy');
 
 // set up session cookie
 const session = require('express-session');
+const flash = require('connect-flash')
+const customWare = require('./config/izitoast')
 
 // setup the view engine
 app.set('view engine', 'ejs');
@@ -49,6 +51,10 @@ app.use(passport.session())
 
 // set up passport-local-strategy
 app.use(passportLocal.setAuthenticatedUser);
+
+// flash
+app.use(flash());
+app.use(customWare.setFlash);
 
 // use express router
 app.use('/', require('./routes'));

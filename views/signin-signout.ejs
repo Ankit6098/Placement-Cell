@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/1063/1063196.png" type="image/x-icon">
+    <!-- fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- animate -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <link rel="stylesheet" href="/css/iziToast.css">
     <link rel="stylesheet" href="/css/signin-up.css">
     <title><%= title %></title>
 </head>
@@ -134,8 +138,65 @@
         </form>
     </div>
 
-    <!-- <script src="https://cdnjs.com/libraries/bodymovin" type="text/javascript"></script> -->
-
+    <!-- izitoast -->
+    <script src="/js/izitoast.js"></script>
+    <!-- local -->
     <script src="/js/script.js"></script>
+
+    <!-- izitoast -->
+    <script>
+        <% if (flash.success && flash.success.length > 0) { %> 
+            iziToast.success({
+                title: 'Success',
+                message: '<%= flash.success %>',
+                theme: 'dark',
+                backgroundColor: 'linear-gradient(130deg, rgba(18,119,243,1) 0%, rgba(11,73,149,1) 97%)',
+                position: 'topCenter',
+                progressBarColor: 'white',
+                transitionInMobile: 'fadeInUp',
+                transitionOutMobile: 'fadeOutUp',
+                
+            });
+        <% } %>
+
+        <% if (flash.error && flash.error.length > 0) { %> 
+            iziToast.error({
+                title: 'Error',
+                message: '<%= flash.error %>',
+                theme: 'dark',
+                backgroundColor: '#AA0808',
+                position: 'topCenter',
+                progressBarColor: 'white',
+                transitionInMobile: 'fadeInUp',
+                transitionOutMobile: 'fadeOutUp',
+            });
+        <% } %>
+
+        <% if (flash.info && flash.info.length > 0) { %> 
+            iziToast.warning({
+                title: 'Caution',
+                message: '<%= flash.info %>',
+                theme: 'dark',
+                backgroundColor: '#FFB300',
+                position: 'topCenter',
+                progressBarColor: 'white',
+                transitionInMobile: 'fadeInUp',
+                transitionOutMobile: 'fadeOutUp',
+            });
+        <% } %>
+
+        <% if (flash.warning && flash.warning.length > 0) { %> 
+            iziToast.error({
+                title: 'Error',
+                message: '<%= flash.warning %>',
+                theme: 'dark',
+                backgroundColor: '#AA0808',
+                position: 'topCenter',
+                progressBarColor: 'white',
+                transitionInMobile: 'fadeInUp',
+                transitionOutMobile: 'fadeOutUp',
+            });
+        <% } %>
+    </script>
 </body>
 </html>

@@ -105,13 +105,13 @@ for (let i = 0; i < activeJob.length; i++) {
     activeJob[i].addEventListener('click', () => {
         console.log("more info button clicked");
         const id = activeJob[i].getAttribute('data-id');
+        jobMoreInfoContainer.style = "display: flex";
         fetch(`/dashboard/getJobs/${id}`)
             .then(res => res.json())
             .then(data => {
                 renderJobs(data.data.jobs);
             })
             .catch(err => console.log(err));
-        jobMoreInfoContainer.style = "display: flex";
     });
 }
 
@@ -174,6 +174,7 @@ function renderJobs(jobs) {
 // close container button
 
 function closeContainerbtn() {
+    jobMoreInfoContainer.innerHTML = "";
     jobMoreInfoContainer.style = "display: none";
 }
 
@@ -200,29 +201,4 @@ function applyJobs() {
         })
         .catch(err => console.log(err));
 }
-
-
-// ajax request for applied jobs
-
-// const applyJobsRequest = document.querySelector(".company-more-info-details-apply-btn");
-
-// for (let i = 0; i < applyJobsRequest.length; i++) {
-//     let newApplyJobsRequest = applyJobsRequest[i]; // Use applyJobsRequest[i] to get the current element
-
-//     newApplyJobsRequest.submit(function (e) { // Use addEventListener to attach the submit event
-//         e.preventDefault();
-//         // Assuming you want to extract the job ID from some attribute of the element, for example:
-//         const jobId = newApplyJobsRequest.getAttribute("data-job-id"); // Replace "data-job-id" with the actual attribute name
-//         $.ajax({
-//             type: "GET",
-//             url: `/dashboard/applyJobs/${jobId}`, // Use template literals to insert the jobId
-//             success: function (response) {
-//                 console.log(response);
-//             },
-//             error: function (err) {
-//                 console.log(err);
-//             }
-//         });
-//     });
-// }
 
