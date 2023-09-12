@@ -13,11 +13,11 @@
 
     <div class="view-user-profile animate__animated animate__fadeIn">
         <div class="user-image">
-            <img src="<%= user.avatar %>" alt="">
+            <img src="<%= locals.user.avatar %>" alt="">
             <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script><lottie-player src='https://lottie.host/aea02360-3c6f-43d6-8a74-30a465a981d7/ESRrDQw4iW.json' background='transparent' speed='1' style='width: 35px; height: 35px' autoplay direction='1' mode='normal'></lottie-player>
         </div>
-        <h5><%= user.name %></h5>
-        <p><%= user.email %></p>
+        <h5><%= locals.user.name %></h5>
+        <p><%= locals.user.email %></p>
         <span class="material-symbols-outlined edit-button" style="font-size: 1.4rem; margin: 0;">edit_square</span>
     </div>
 

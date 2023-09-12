@@ -1,10 +1,11 @@
 const User = require('../models/user');
 
 module.exports.userEditProfile = async function(req, res) {
-    const user = await User.findOne(email = req.body.email)
+    // const user = await User.findOne(email = req.body.email)
+    // console.log(user);
     res.render('user-edit-profile', {
         title: 'User Profile',
-        user: user
+        // user: user
     });
 };
 
