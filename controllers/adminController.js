@@ -52,6 +52,7 @@ module.exports.createAdmin = async function (req, res) {
 
     if (req.body.username == "admin" && req.body.password == "admin") {
         req.session.isAdmin = true;
+        req.flash('success', 'Successfully logged in')
         return res.redirect('/admin');
     } else {
         return res.redirect('back');
@@ -74,15 +75,15 @@ module.exports.createJobs = async function (req, res) {
   const job = await Job.create(req.body);
   if (job) {
     console.log("job created successfully");
+    req.flash('success', 'Job Created Successfully');
     if (req.xhr) {
       return res.json(200, {
         data: {
           job: job,
         },
-        message: "Job created successfully!",
+        message: req.flash('success', 'Job Created Successfully'),
       });
     }
-    req.flash('success', 'Job Created Successfully');
     return res.redirect("back");
   } else {
     console.log("error in creating job");

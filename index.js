@@ -3,6 +3,7 @@ const app = express();
 const port = 8000;
 const path = require('path');
 require('dotenv').config();
+const expressLayout = require('express-ejs-layouts')
 
 const db = require('./config/mongoose');
 const MongoStore = require('connect-mongo');
@@ -28,6 +29,12 @@ app.set('views', path.join(__dirname, 'views'));
 
 // setup the static files
 app.use(express.static('assets'));
+
+// layout
+// app.use(expressLayout);
+// // extract styles and scripts from sub pages into the layout
+// app.set('layout extractStyles', true);
+// app.set('layout extractScripts', true);
 
 // mongo store is used to store the session cookie of user in the db
 app.use(session({

@@ -76,7 +76,7 @@ module.exports.applyJobs = async function (req, res) {
         await user.save();
       } else {
         console.log("Error in applying");
-        req.flsh('info', 'Error in Applying')
+        req.flash('info', 'Error in Applying')
         return res.redirect('/dashboard');
       }
       return res.redirect('/dashboard');

@@ -26,11 +26,11 @@ module.exports.userUpdateProfile = async function(req, res) {
         console.log(user.bio);
         user.save();
         console.log('Profile Updated Successfully');
-        req.flash('success', 'Profile Updated Successfully')
+        req.flash('success', "Profile Updated Successfully")
         return res.redirect('/userEditProfile');
     } else {
         console.log('User not found');
-        req.flash('info', "Something Went Wrong")
+        req.flash('alert', "Something Went Wrong")
         return res.redirect('back');
     }
 };

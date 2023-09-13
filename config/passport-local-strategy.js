@@ -13,8 +13,8 @@ passport.use(new LocalStrategy({
     const user = await User.findOne({email: email});
         
     if (!user) {
-        console.log('Invalid Username/Password');
-        req.flash('Invalid Username/Password')
+        console.log('Invalid email/Password');
+        req.flash('erorr', 'Invalid email/Password')
         return done(null, false);
     }
 
@@ -46,6 +46,7 @@ passport.deserializeUser(async function(id, done) {
         const user = await User.findById(id);
     
         if (!user) {
+            req.flash('alert', "User not found")
             throw new Error('User not found');
         }
 

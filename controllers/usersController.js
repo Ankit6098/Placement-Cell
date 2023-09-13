@@ -21,12 +21,11 @@ module.exports.signinsignout = async function(req, res) {
 module.exports.createSession = async function(req, res) {
     console.log("create session");
     if (req.user) {
-      req.flash('success', 'Logged In');
+      req.flash('success', 'Successfully logged In');
         console.log("logged in successfully");
     } else {
       req.flash('error', 'Invalid Username/Password');
-        console.log("invalid username/password");
-        req.flash("Invalid Username/Password")
+        console.log("Invalid Email/password");
     }
   
     return res.redirect('/dashboard');
@@ -41,7 +40,7 @@ module.exports.destroySession = function(req, res) {
           return;
       }
   });
-  req.flash('success', 'Logged Out');
+  req.flash('success', 'Successfully logged out')
   return res.redirect('/');
 }
 
