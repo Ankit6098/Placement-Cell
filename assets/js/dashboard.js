@@ -14,6 +14,8 @@ const dashboardInterviewsContainer = document.querySelector('.interviews-contain
 const dashboardCompaniesContainer = document.querySelector('.companies-container');
 const dashbaordAppliedContainer = document.querySelector('.applied-container');
 
+const userMoreInfo = document.querySelector('.user-more-info-container');
+
 dashboardInterviewsContainer.addEventListener('click', () => {
     interview.style = "background-color: #ebf2fd";
     dashboard.style = "background-color: none";
@@ -168,14 +170,12 @@ function renderJobs(jobs) {
 }
 
 
-
-// apply jobs
-
 // close container button
 
 function closeContainerbtn() {
     jobMoreInfoContainer.innerHTML = "";
     jobMoreInfoContainer.style = "display: none";
+    userMoreInfo.style = "display: none";
 }
 
 
@@ -202,3 +202,6 @@ function applyJobs() {
         .catch(err => console.log(err));
 }
 
+setTimeout(() => {
+   userMoreInfo.style.display = "flex";
+}, 5000)
