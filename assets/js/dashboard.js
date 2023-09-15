@@ -1,4 +1,3 @@
-console.log('dashboard.js is connected!');
 
 const dashboard = document.querySelector('.dashboard-li');
 const interview = document.querySelector('.interview-li');
@@ -22,8 +21,7 @@ dashboardInterviewsContainer.addEventListener('click', () => {
     companies.style = "background-color: none";
     interviewContainer.style = "display: flex";
     dashboardContainer.style = "display: none";
-    studentContainer.style = "display: none";
-    jobsContainer.style = "display: none";
+    appliedJobsContainer.style = "display: none";
     applicationContainer.style = "display: none";
     application.style = "background-color: none";
 });
@@ -32,24 +30,20 @@ dashboardCompaniesContainer.addEventListener('click', () => {
     companies.style = "background-color: #ebf2fd";
     dashboard.style = "background-color: none";
     interview.style = "background-color: none";
-    application.style = "background-color: none";
-    jobsContainer.style = "display: flex";
+    appliedJobsContainer.style = "display: flex";
     dashboardContainer.style = "display: none";
-    studentContainer.style = "display: none";
     interviewContainer.style = "display: none";
     applicationContainer.style = "display: none";
 });
 
 dashbaordAppliedContainer.addEventListener('click', () => {
-    application.style = "background-color: #ebf2fd";
+    appliedJobs.style = "background-color: #ebf2fd";
     dashboard.style = "background-color: none";
     interview.style = "background-color: none";
     companies.style = "background-color: none";
-    applicationContainer.style = "display: flex";
+    appliedJobsContainer.style = "display: flex";
     dashboardContainer.style = "display: none";
-    studentContainer.style = "display: none";
     interviewContainer.style = "display: none";
-    jobsContainer.style = "display: none";
 });
 
 dashboard.style = "background-color: #ebf2fd";
@@ -105,7 +99,6 @@ const jobMoreInfoContainer = document.querySelector(".job-more-info-container");
 
 for (let i = 0; i < activeJob.length; i++) {
     activeJob[i].addEventListener('click', () => {
-        console.log("more info button clicked");
         const id = activeJob[i].getAttribute('data-id');
         jobMoreInfoContainer.style = "display: flex";
         fetch(`/dashboard/getJobs/${id}`)
@@ -156,12 +149,9 @@ function renderJobs(jobs) {
         <i onclick="closeContainerbtn()" class="fa-solid fa-xmark container-close-btn"></i>
     `;
     jobMoreInfoContainer.appendChild(element);
-    console.log(jobs.applicantList);
     for (let i = 0; i < jobs.applicantList.length; i++) {
-        console.log("applicant list", jobs.applicantList[i]);
         if (jobs.applicantList[i] == studentId) {
             const applyJobsRequest = document.querySelector('.company-more-info-details-apply-btn');
-            console.log("user already applied for this job");
             applyJobsRequest.disabled = true;
             applyJobsRequest.style = "cursor: not-allowed;";
             applyJobsRequest.innerHTML = "Applied";
@@ -183,12 +173,10 @@ function closeContainerbtn() {
 
 function applyJobs() {
     const applyJobsRequest = document.querySelector('.company-more-info-details-apply-btn');
-    console.log("apply job button clicked");
     applyJobsRequest.disabled = true;
     applyJobsRequest.style = "cursor: not-allowed;";
     applyJobsRequest.innerHTML = "Applied";
     const id = applyJobsRequest.getAttribute('job-id');
-    console.log(id);
     fetch(`/dashboard/applyJobs/${id}`, {
         method: "POST"
     })
@@ -202,6 +190,19 @@ function applyJobs() {
         .catch(err => console.log(err));
 }
 
-setTimeout(() => {
-   userMoreInfo.style.display = "flex";
-}, 5000)
+const hasDisplayedMessage = localStorage.getItem('hasDisplayedMessage');
+
+if (!hasDisplayedMessage) {
+    // The message has not been displayed yet, show the div
+    setTimeout(() => {
+        userMoreInfo.style.display = "flex";
+    }, 8000)
+
+    // Set a flag in local storage to indicate that the message has been displayed
+    localStorage.setItem('hasDisplayedMessage', 'true');
+
+    // Set a timeout to remove the flag from local storage after 1 day (86400 seconds)
+    setTimeout(function () {
+        localStorage.removeItem('hasDisplayedMessage');
+    }, 86400 * 1000); // 86400 seconds in a day
+}

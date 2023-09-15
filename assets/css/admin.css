@@ -364,17 +364,96 @@ body {
 }
 
 .student-more-info-container {
-    width: 50%;
-    height: 70%;
+    width: 400px;
+    height: 600px;
     background-color: #fff;
-    border-radius: 20px;
+    border-radius: 25px;
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     display: none;
+}
+
+.student-more-info {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.student-more-info-upper-section {
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.student-more-info-profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.student-more-info-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
+
+.student-more-info-join-date {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.fa-solid {
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.student-more-info-lower-section {
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    gap: 0.1rem;
+    margin-bottom: 20px;
+}
+
+.student-more-info-img {
+    width: 20px;
+    height: 20px;
+}
+
+.social-link {
+    font-size: 1.2rem;
+    color: #8291c7;
+    margin: 0;
+}
+
+.social-link-heading {
+    width: 95%;
+    margin-bottom: 5px;
+}
+
+.social-link-container {
+    width: 95%;
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 5px;
 }
 
 /* interview */
@@ -710,8 +789,7 @@ body {
     align-items: center;
     padding: 20px 0px;
     gap: 1rem;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
 }
 
 .active-applied-container {

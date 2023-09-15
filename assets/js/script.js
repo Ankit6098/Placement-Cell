@@ -17,7 +17,6 @@ const toggleAdmin = document.querySelector(".toggle-admin");
 const toggleUser = document.querySelector('.toggle-user');
 
 toggleUser.addEventListener('click', () => {
-    console.log("user click");
     user.classList.remove('animate__bounceIn');
     user.classList.add('animate__flipInY');
     admin.classList.remove('animate__bounceIn');
@@ -27,7 +26,6 @@ toggleUser.addEventListener('click', () => {
 })
 
 toggleAdmin.addEventListener('click', () => {
-    console.log("admin click");
     user.classList.remove('animate__bounceIn');
     user.classList.add('animate__flipInY');
     admin.classList.remove('animate__bounceIn');
@@ -38,19 +36,16 @@ toggleAdmin.addEventListener('click', () => {
 })
 
 userOption.addEventListener('click', () => {
-    console.log('userOption clicked');
     signInPage.classList.add('active');
     userAdminOption.style.display = 'none';
 });
 
 adminOption.addEventListener('click', () => {
-    console.log('adminOption clicked');
     adminLogin.style.display = 'flex';
     admin.style.display = 'none';
 });
 
 toggleSignUpPage.addEventListener('click', () => {
-    console.log('toggleSignUpPage clicked');
     // signUpPage.classList.add('animate__animated');
     // signUpPage.classList.add('animate__fadeInRight');
     signUpPage.classList.add('active');
@@ -59,7 +54,6 @@ toggleSignUpPage.addEventListener('click', () => {
 );
 
 toggleSignInPage.addEventListener('click', () => {
-    console.log('toggleSignInPage clicked');
     // signInPage.classList.add('animate__animated');
     // signInPage.classList.add('animate__fadeInLeft');
     signInPage.classList.add('active');
@@ -71,11 +65,9 @@ const showPassword = document.querySelector('.show-password');
 
 showPassword.addEventListener('click', () => {
     if (showPassword.classList.contains('fa-eye')) {
-        console.log('icon fa-eye clicked');
         showPassword.classList.remove('fa-eye');
         showPassword.classList.add('fa-eye-slash');
     } else {
-        console.log('icon fa-eye-slash clicked');
         showPassword.classList.remove('fa-eye-slash');
         showPassword.classList.add('fa-eye');
     }
@@ -93,11 +85,9 @@ const showConfirmPassword = document.querySelector('.show-confirm-password');
 
 showConfirmPassword.addEventListener('click', () => {
     if (showConfirmPassword.classList.contains('fa-eye')) {
-        console.log('icon fa-eye clicked');
         showConfirmPassword.classList.remove('fa-eye');
         showConfirmPassword.classList.add('fa-eye-slash');
     } else {
-        console.log('icon fa-eye-slash clicked');
         showConfirmPassword.classList.remove('fa-eye-slash');
         showConfirmPassword.classList.add('fa-eye');
     }

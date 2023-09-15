@@ -1,4 +1,3 @@
-console.log('admin dashboard  is connected!');
 
 const dashboard = document.querySelector('.dashboard-li');
 const student = document.querySelector('.student-li');
@@ -168,16 +167,14 @@ application.addEventListener('click', () => {
 // fetch students more info
 for (let i = 0; i < activeStudent.length; i++) {
     activeStudent[i].addEventListener('click', () => {
-    console.log("more info button clicked");
     const id = activeStudent[i].getAttribute('data-id');
-    console.log(id);
     fetch(`/admin/getStudents/${id}`)
         .then(res => res.json())
         .then(data => {
             renderStudents(data.data.students);
         })
         .catch(err => console.log(err));
-    studentMoreInfo.style = "display: block";
+    studentMoreInfo.style = "display: flex";
 });
 }
 
@@ -188,27 +185,105 @@ function renderStudents(students) {
     } else {
         students.avatar = students.avatar;
     }
+
+    let year = "";
+    let month = "";
+    let date = ""
+    
+    for (let i = 0; i <= 10; i++) {
+        if (students.createdAt[i] == "-") {
+            continue;
+        } else if (i >= 0 && i <= 3) {
+            year += students.createdAt[i];
+        } else if (i >= 5 && i <= 6) {
+            month += students.createdAt[i];
+        } else if (i >= 8 && i <= 9) {
+            date += students.createdAt[i];
+        }
+    }
+
+    let updatedMonth = "";
+
+    const monthsArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    for (let i = 0; i < monthsArr.length; i++) {
+        if (i == month) {
+            updatedMonth = monthsArr[i];
+        }
+    }
+
+    if (students.lastname == undefined) {
+        students.lastname = "";
+    }
+
+    if (students.phone == undefined) {
+        students.phone = "-"
+    }
+
+    if (students.city == undefined ) {
+        students.city = "-";
+    }
+
+    if (students.country == undefined) {
+        students.country = "";
+    }
+
+    if (students.portfolio == undefined) {
+        students.portfolio = "";
+    }
+
+    if (students.github == undefined) {
+        students.github = "";
+    }
+
+    if (students.linkedin == undefined) {
+        students.linkedin = "";
+    }
+
+    if (students.twitter == undefined) {
+        students.twitter = "";
+    }
+
+    if (students.instagram == undefined) {
+        students.instagram = "";
+    }
+    
+    console.log(students);
     const element = document.createElement('div');
     element.classList.add('student-more-info');
     element.innerHTML = `
-        <div class="student-more-info">
-            <img src="${students.avatar}" alt="student image" class="student-more-info-img">
-            <div class="student-more-info-text">
-                <h3 class="student-more-info-name">${students.name} ${students.lastname}</h3>
-                <p class="student-more-info-email">${students.email}</p>
-                <p class="student-more-info-phone">${students.phone}</p>
-                <p class="student-more-info-city">${students.city}</p>
-                <p class="student-more-info-country">${students.country}</p>
-                <p> social media: </p>
-                <p class="student-more-info-portfolio">${students.portfolio}</p>
-                <p class="student-more-info-github">${students.github}</p>
-                <p class="student-more-info-linkedin">${students.linkedin}</p>
-                <p class="student-more-info-twitter">${students.twitter}</p>
-                <p class="student-more-info-instagram">${students.instagram}</p>
+    
+            <div class="student-more-info-upper-section">
+                <img src="${students.avatar}" alt="student image" class="student-more-info-profile-img">
+                <p class="student-more-info-name">${students.name} ${students.lastname}</p>
+                <p class="student-more-info-join-date"> Joined: ${date + " " + updatedMonth + " " + year}</p>
+            </div>
+            <div class="student-more-info-lower-section">
+                <p class="student-more-info-email"><i class="fa-solid fa-envelope"></i> ${students.email}</p>
+                <p class="student-more-info-phone"><i class="fa-solid fa-phone"></i> ${students.phone}</p>
+                <p class="student-more-info-city"><i class="fa-solid fa-location-dot"></i> ${students.city} ${students.country}</p>
+            </div>
+            <p class="social-link-heading"> Social Links: </p>
+            <div class="social-link-container">
+                <a href="${students.portfolio}" target="_blank" class="ancher"><i class="fa-solid fa-rocket social-link"></i></a>
+                <a href="${students.github}" target="_blank" class="ancher"><i class="fa-brands fa-github social-link"></i></a>
+                <a href="${students.linkedin}" target="_blank" class="ancher"><i class="fa-brands fa-linkedin social-link"></i></a>
+                <a href="${students.twitter}" target="_blank" class="ancher"><i class="fa-brands fa-twitter social-link"></i></a>
+                <a href="${students.instagram}" target="_blank" class="ancher"><i class="fa-brands fa-instagram social-link"></i></a>
             </div>
             <i onclick="closeContainerbtn()" class="fa-solid fa-xmark container-close-btn"></i>
-        </div>
     `;
+
+    const anchorElements = element.querySelectorAll("a");
+    anchorElements.forEach((anchor) => {
+        const hrefValue = anchor.getAttribute("href");
+        count++;
+        // Check if hrefValue is undefined or an empty string
+        if (!hrefValue || hrefValue === "") {
+            anchor.remove();
+        }
+    });
+
     studentMoreInfo.appendChild(element);
 }
 
@@ -220,9 +295,7 @@ companyAddBtn.addEventListener('click', () => {
 
 for (let i = 0; i < activeJob.length; i++) {
     activeJob[i].addEventListener('click', () => {
-    console.log("more info button clicked");
     const id = activeJob[i].getAttribute('data-id');
-    console.log(id);
     fetch(`/admin/getCompanies/${id}`)
         .then(res => res.json())
         .then(data => {
@@ -320,7 +393,6 @@ for (let i = 0; i < rejectBtn.length; i++) {
 
 // display all applicant application
 rejectedBtn.addEventListener('click', () => {
-    console.log("all button clicked");
     rejectedBtn.style = "background-color: #e0e7fd";
     pendingBtn.style = "background-color: #ebf2fd";
     acceptedBtn.style = "background-color: #ebf2fd";
@@ -331,7 +403,6 @@ rejectedBtn.addEventListener('click', () => {
 
 // display pending aplicant application
 pendingBtn.addEventListener('click', () => {
-    console.log("pending button clicked");
     pendingBtn.style = "background-color: #e0e7fd";
     rejectedBtn.style = "background-color: #ebf2fd";
     acceptedBtn.style = "background-color: #ebf2fd";
@@ -342,7 +413,6 @@ pendingBtn.addEventListener('click', () => {
 
 // display accepted aplicant application
 acceptedBtn.addEventListener('click', () => {
-    console.log("accepted button clicked");
     acceptedBtn.style = "background-color: #e0e7fd";
     rejectedBtn.style = "background-color: #ebf2fd";
     pendingBtn.style = "background-color: #ebf2fd";
@@ -354,7 +424,6 @@ acceptedBtn.addEventListener('click', () => {
 // assign interview button
 for (let i = 0; i < applicationAssignBtn.length; i++) {
     applicationAssignBtn[i].addEventListener('click', () => {
-        console.log("assign button clicked");
         interviewFormContainer.style = "display: flex";
         assignInterviewUserId = applicationAssignBtn[i].getAttribute('interview-id');
         interviewFrom.action = `/admin/assign-interview/${assignInterviewUserId}`;
@@ -365,7 +434,6 @@ for (let i = 0; i < applicationAssignBtn.length; i++) {
 // edit interview form button
 for (let i = 0; i < editbtn.length; i++) {
     editbtn[i].addEventListener('click', () => {
-        console.log("edit button clicked");
         interviewFormContainer.style = "display: flex";
         assignInterviewUserId = editbtn[i].getAttribute('interview-id');
         interviewFrom.action = `/admin/assign-interview/${assignInterviewUserId}`;
@@ -378,7 +446,6 @@ const activeJobs = document.querySelector('.active-jobs');
 
 function deleteCompany() {
     const deleteBtn = document.querySelector('.company-delete-button');
-    console.log("delete button clicked");
     const id = deleteBtn.getAttribute('data-id');
     $.ajax({
         type: 'GET',
@@ -395,10 +462,7 @@ function deleteCompany() {
         let jobId = activeJob[i].getAttribute('data-id');
         if (jobId == id) {
             activeJob[i].remove();
-            console.log("Company div removed");
             break;
-        } else {
-            console.log("Company div not found");
         }
     }
     if (activeJobsContainer.children.length == 0) {
@@ -414,10 +478,8 @@ function interviewForm() {
     // if (interviewFormContainer.style.display == "flex") {
         interviewFrom.addEventListener('submit', (e) => {
             e.preventDefault();
-            console.log("interview form submitted");
             const id = interviewFrom.getAttribute('interview-id');
             const data = $(interviewFrom).serialize();
-            console.log(id);
             $.ajax({
                 type: 'POST',
                 url: `/admin/assign-interview/${id}`,
@@ -440,7 +502,6 @@ function addCompany() {
     // if (companyAddFormContainer.style.display == "false") {
         addCompanyForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            console.log("add company form submitted");
             const data = $(addCompanyForm).serialize();
             $.ajax({
                 type: 'POST',

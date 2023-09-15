@@ -118,6 +118,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 1rem;
+    cursor: pointer;
 }
 
 .interviews-container img {
@@ -138,6 +139,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 1rem;
+    cursor: pointer;
 }
 
 .companies-container img {
@@ -158,6 +160,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 1rem;
+    cursor: pointer;
 }
 
 .applied-container img {
