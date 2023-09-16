@@ -451,7 +451,17 @@ function deleteCompany() {
         type: 'GET',
         url: `/admin/delete-job/${id}`,
         success: function(data) {
-            console.log(data);
+            iziToast.success({
+                title: 'Success',
+                message: 'Company Deleted Successfully',
+                theme: 'dark',
+                backgroundColor: 'linear-gradient(130deg, rgba(18,119,243,1) 0%, rgba(11,73,149,1) 97%)',
+                position: 'topCenter',
+                progressBarColor: 'white',
+                transitionInMobile: 'fadeInUp',
+                transitionOutMobile: 'fadeOutUp',
+                
+            });
         },
         error: function(err) {
             console.log(err);
@@ -485,7 +495,17 @@ function interviewForm() {
                 url: `/admin/assign-interview/${id}`,
                 data: data,
                 success: function(data) {
-                    console.log(data);
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'Interview Assign Successfully',
+                        theme: 'dark',
+                        backgroundColor: 'linear-gradient(130deg, rgba(18,119,243,1) 0%, rgba(11,73,149,1) 97%)',
+                        position: 'topCenter',
+                        progressBarColor: 'white',
+                        transitionInMobile: 'fadeInUp',
+                        transitionOutMobile: 'fadeOutUp',
+                        
+                    });
                 },
                 error: function(err) {
                     console.log(err);
@@ -508,6 +528,16 @@ function addCompany() {
                 url: '/admin/create-jobs',
                 data: data,
                 success: function(data) {
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'Job Created Successfully',
+                        theme: 'dark',
+                        backgroundColor: 'linear-gradient(130deg, rgba(18,119,243,1) 0%, rgba(11,73,149,1) 97%)',
+                        position: 'topCenter',
+                        progressBarColor: 'white',
+                        transitionInMobile: 'fadeInUp',
+                        transitionOutMobile: 'fadeOutUp',
+                    });
                     const element = document.createElement('div');
                     element.classList.add('active-jobs');
                     element.setAttribute('data-id', data.data.job._id);

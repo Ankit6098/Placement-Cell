@@ -172,6 +172,17 @@ function closeContainerbtn() {
 // apply job fetch request
 
 function applyJobs() {
+    iziToast.success({
+        title: 'Success',
+        message: '<%= Successfully Applied %>',
+        theme: 'dark',
+        backgroundColor: 'linear-gradient(130deg, rgba(18,119,243,1) 0%, rgba(11,73,149,1) 97%)',
+        position: 'topCenter',
+        progressBarColor: 'white',
+        transitionInMobile: 'fadeInUp',
+        transitionOutMobile: 'fadeOutUp',
+        
+    });
     const applyJobsRequest = document.querySelector('.company-more-info-details-apply-btn');
     applyJobsRequest.disabled = true;
     applyJobsRequest.style = "cursor: not-allowed;";

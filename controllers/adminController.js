@@ -74,13 +74,11 @@ module.exports.createJobs = async function (req, res) {
   const job = await Job.create(req.body);
   if (job) {
     console.log("job created successfully");
-    req.flash('success', 'Job Created Successfully');
     if (req.xhr) {
       return res.json(200, {
         data: {
           job: job,
         },
-        message: req.flash('success', 'Job Created Successfully'),
       });
     }
     return res.redirect("back");
