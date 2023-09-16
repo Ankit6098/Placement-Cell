@@ -310,6 +310,19 @@ body {
     display: none;
 }
 
+.search-container input {
+    width: 25%;
+    height: 40px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
 .company-more-info-img img {
     width: 200px;
     height: 200px;

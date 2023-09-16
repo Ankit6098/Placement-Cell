@@ -566,6 +566,7 @@ body {
     font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 1px;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
 
 .company-add-btn {
