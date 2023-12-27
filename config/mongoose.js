@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-require('dotenv').config();
+const mongoose = require("mongoose");
+require("dotenv").config();
 
 // connect to the database
 mongoose.connect(process.env.mongoDbUrl);
@@ -8,9 +8,9 @@ mongoose.connect(process.env.mongoDbUrl);
 const db = mongoose.connection;
 
 // error handling
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on("error", console.error.bind(console, "connection error:"));
 
 // open the connection
-db.once('open', () => {
-    console.log('Connected to the database!');
+db.once("open", () => {
+  console.log("Connected to the database!");
 });

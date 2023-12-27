@@ -7,12 +7,12 @@ module.exports.dashboard = async function (req, res) {
   const users = await User.find();
   const jobs = await Job.find();
   const interviews = await Interview.find();
-  res.render("Dashboard", { 
-    title: "Dashboard", 
+  res.render("Dashboard", {
+    title: "Dashboard",
     isAdmin: req.session.isAdmin || false,
     users: users,
     jobs: jobs,
-    interviews: interviews
+    interviews: interviews,
   });
 };
 
@@ -42,46 +42,47 @@ module.exports.applyJobs = async function (req, res) {
 
   let companyImage;
   if (job.image == "") {
-    companyImage = "https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg"
+    companyImage =
+      "https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg";
   } else {
     companyImage = job.image;
   }
 
   const interview = await Interview.create({
-      job_id: req.params.id,
-      student_id: req.user.id,
-      companyImage: job.companyImage,
-      companyName: job.companyName,
-      companyLocation: job.companylocation,
-      companyEmail: job.email,
-      companyWebsite: job.website,
-      jobTitle: job.jobTitle,
-      jobSalary: job.salary,
-      jobSkills: job.skills,
-      jobDescription: job.jobDescription,
-      studentName: req.user.name,
-      studentImage: req.user.avatar,
-      studentLastname: req.user.lastname,
-      studentLocation: req.user.location,
-      studentEmail: req.user.email,
-      studentPhone: req.user.phone,
-    });
-    if (interview) {
-      job.applicantList.push(req.user.id);
-      await job.save();
-      req.flash('success', 'Applied successfully');
-      const user = await User.findById(req.user.id);
-      if (user) {
-        user.appliedJobs.push(interview._id);
-        await user.save();
-      } else {
-        console.log("Error in applying");
-        req.flash('info', 'Error in Applying')
-        return res.redirect('/dashboard');
-      }
-      return res.redirect('/dashboard');
+    job_id: req.params.id,
+    student_id: req.user.id,
+    companyImage: job.companyImage,
+    companyName: job.companyName,
+    companyLocation: job.companylocation,
+    companyEmail: job.email,
+    companyWebsite: job.website,
+    jobTitle: job.jobTitle,
+    jobSalary: job.salary,
+    jobSkills: job.skills,
+    jobDescription: job.jobDescription,
+    studentName: req.user.name,
+    studentImage: req.user.avatar,
+    studentLastname: req.user.lastname,
+    studentLocation: req.user.location,
+    studentEmail: req.user.email,
+    studentPhone: req.user.phone,
+  });
+  if (interview) {
+    job.applicantList.push(req.user.id);
+    await job.save();
+    req.flash("success", "Applied successfully");
+    const user = await User.findById(req.user.id);
+    if (user) {
+      user.appliedJobs.push(interview._id);
+      await user.save();
     } else {
-      req.flash('error', 'Error in applying');
-      return res.redirect('/dashboard');
+      console.log("Error in applying");
+      req.flash("info", "Error in Applying");
+      return res.redirect("/dashboard");
     }
-}
+    return res.redirect("/dashboard");
+  } else {
+    req.flash("error", "Error in applying");
+    return res.redirect("/dashboard");
+  }
+};

@@ -1,277 +1,329 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/1063/1063196.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link
+      rel="shortcut icon"
+      href="https://cdn-icons-png.flaticon.com/512/1063/1063196.png"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="/css/izitoast.css">
-    <link rel="stylesheet" href="/css/_navbar.css">
-    <link rel="stylesheet" href="/css/dashboard.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/css/izitoast.css" />
+    <link rel="stylesheet" href="/css/_navbar.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+  </head>
+  <body>
     <%- include('_navbar'); %>
-    
+
     <div class="dashboard-main-container">
-        <div class="aside-navbar-links">
-            <ul class="aside-navbar-links-ul" type="none">
-                <li class="dashboard-li"><span class="material-symbols-outlined">
-                    grid_view
-                    </span>Dashboard
-                </li>
-                <li class="interview-li"><span class="material-symbols-outlined">
-                    description
-                    </span>Interviews
-                </li>
-                <li class="companies-li"><span class="material-symbols-outlined">
-                    cases
-                    </span>Jobs
-                </li>
-                <li class="appliedjobs-li"><span class="material-symbols-outlined">
-                    event_note
-                    </span>Applied
-                </li>   
-            </ul>
-            <div class="theme">
-                <span class="material-symbols-outlined">light_mode</span>
-                <span>Light Mode</span>
-            </div>
+      <div class="aside-navbar-links">
+        <ul class="aside-navbar-links-ul" type="none">
+          <li class="dashboard-li">
+            <span class="material-symbols-outlined"> grid_view </span>Dashboard
+          </li>
+          <li class="interview-li">
+            <span class="material-symbols-outlined"> description </span
+            >Interviews
+          </li>
+          <li class="companies-li">
+            <span class="material-symbols-outlined"> cases </span>Jobs
+          </li>
+          <li class="appliedjobs-li">
+            <span class="material-symbols-outlined"> event_note </span>Applied
+          </li>
+        </ul>
+        <div class="theme">
+          <span class="material-symbols-outlined">light_mode</span>
+          <span>Light Mode</span>
         </div>
+      </div>
 
-        <!-- dashboard -->
-        <div class="dashboard-container">
-            <div class="students-interviews-container">
-                <div class="interviews-container">
-                    <img src="/img/undraw_interview_re_e5jn.svg" alt="Interview">
-                    <p>Interviews</p>
-                </div>
-            </div>
-            <div class="companies-and-other-container">
-                <div class="companies-container">
-                    <img src="/img/undraw_building_re_xfcm.svg" alt="Companies">
-                    <p>Companies</p>
-                </div>
-                <div class="applied-container">
-                    <img src="/img/undraw_notes_re_pxhw.svg" alt="Applied">
-                    <p>Applied</p>
-                </div>
-            </div>
+      <!-- dashboard -->
+      <div class="dashboard-container">
+        <div class="students-interviews-container">
+          <div class="interviews-container">
+            <img src="/img/undraw_interview_re_e5jn.svg" alt="Interview" />
+            <p>Interviews</p>
+          </div>
         </div>
+        <div class="companies-and-other-container">
+          <div class="companies-container">
+            <img src="/img/undraw_building_re_xfcm.svg" alt="Companies" />
+            <p>Companies</p>
+          </div>
+          <div class="applied-container">
+            <img src="/img/undraw_notes_re_pxhw.svg" alt="Applied" />
+            <p>Applied</p>
+          </div>
+        </div>
+      </div>
 
-        <!-- interview -->
-        <div class="interviews-main-container">
-            <!-- heading -->
-            <div class="heading">
-                <h2>Interviews</h2>
-            </div>
-            <!-- active interviews -->
-            <% let interviewCount = 0; %>
-            <div class="display-interview-container">
-                <% interviews.map((interview) => { %>
-                    <% if (interview.accepted == true && interview.student_id == user._id) { %>
-                        <% interviewCount++; %>
-                        <div class="active-interview-container" job-id="<%=interview._id%>">
-                            <div class="interview-details">
-                                <div class="interview-company-img">
-                                    <% if (interview.companyImage == "") { %>
-                                        <img src="https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg" alt="" srcset="">
-                                    <% } else { %>
-                                    <img src="<%= interview.companyImage %>" alt="">
-                                    <% } %>
-                                </div>
-                                <div>
-                                    <p><%= interview.companyName %> - <%= interview.companyLocation %></p>
-                                    <div><%= interview.jobTitle %></div>
-                                </div>
-                            </div>
-                            <div class="interview-job-aplicant">
-                                <p><%= interview.studentName %></p>
-                            </div>
-                            <div class="date-time">
-                                <p><%= interview.date %>  <%= interview.time %></p>
-                            </div>
-                            <div class="interview-mode">
-                                <p><%= interview.interviewMode %></p>
-                            </div>
-                        </div>
-                    <% } %>
-                <% }) %>
-                <% if (interviewCount == 0) { %>
-                    <div class="no-found">
-                        <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script><lottie-player src='https://lottie.host/f135a538-9be5-4487-b2da-7f49b93e8dbf/Y22iaG84qI.json' background='transparent' speed='1' style='width: 300px; height: 300px' loop autoplay direction='1' mode='normal'></lottie-player>
-                        <p>No Interview Schedule</p>
-                    </div>
+      <!-- interview -->
+      <div class="interviews-main-container">
+        <!-- heading -->
+        <div class="heading">
+          <h2>Interviews</h2>
+        </div>
+        <!-- active interviews -->
+        <% let interviewCount = 0; %>
+        <div class="display-interview-container">
+          <% interviews.map((interview) => { %> <% if (interview.accepted ==
+          true && interview.student_id == user._id) { %> <% interviewCount++; %>
+          <div class="active-interview-container" job-id="<%=interview._id%>">
+            <div class="interview-details">
+              <div class="interview-company-img">
+                <% if (interview.companyImage == "") { %>
+                <img
+                  src="https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg"
+                  alt=""
+                  srcset=""
+                />
+                <% } else { %>
+                <img src="<%= interview.companyImage %>" alt="" />
                 <% } %>
+              </div>
+              <div>
+                <p>
+                  <%= interview.companyName %> - <%= interview.companyLocation
+                  %>
+                </p>
+                <div><%= interview.jobTitle %></div>
+              </div>
             </div>
+            <div class="interview-job-aplicant">
+              <p><%= interview.studentName %></p>
+            </div>
+            <div class="date-time">
+              <p><%= interview.date %> <%= interview.time %></p>
+            </div>
+            <div class="interview-mode">
+              <p><%= interview.interviewMode %></p>
+            </div>
+          </div>
+          <% } %> <% }) %> <% if (interviewCount == 0) { %>
+          <div class="no-found">
+            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+            <lottie-player
+              src="https://lottie.host/f135a538-9be5-4487-b2da-7f49b93e8dbf/Y22iaG84qI.json"
+              background="transparent"
+              speed="1"
+              style="width: 300px; height: 300px"
+              loop
+              autoplay
+              direction="1"
+              mode="normal"
+            ></lottie-player>
+            <p>No Interview Schedule</p>
+          </div>
+          <% } %>
         </div>
+      </div>
 
+      <!-- jobs -->
+      <div class="companies-main-container">
         <!-- jobs -->
-        <div class="companies-main-container">
-            <!-- jobs -->
-            <div class="heading">
-                <h2>Jobs</h2>
-                <div class="search-container">
-                    <input class="inputter" type="text" placeholder="Search jobs, Intership">
-                    <input type="text" placeholder="Lcoation">
-                </div>
-            </div>
-            <!-- active jobs -->
-            <% if (jobs.length == 0) { %>
-                <div class="no-found">
-                    <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script><lottie-player src='https://lottie.host/f135a538-9be5-4487-b2da-7f49b93e8dbf/Y22iaG84qI.json' background='transparent' speed='1' style='width: 300px; height: 300px' loop autoplay direction='1' mode='normal'></lottie-player>
-                    <p>No Jobs Available</p>
-                </div>
+        <div class="heading">
+          <h2>Jobs</h2>
+          <div class="search-container">
+            <input
+              class="inputter"
+              type="text"
+              placeholder="Search jobs, Intership"
+            />
+            <input type="text" placeholder="Lcoation" />
+          </div>
+        </div>
+        <!-- active jobs -->
+        <% if (jobs.length == 0) { %>
+        <div class="no-found">
+          <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+          <lottie-player
+            src="https://lottie.host/f135a538-9be5-4487-b2da-7f49b93e8dbf/Y22iaG84qI.json"
+            background="transparent"
+            speed="1"
+            style="width: 300px; height: 300px"
+            loop
+            autoplay
+            direction="1"
+            mode="normal"
+          ></lottie-player>
+          <p>No Jobs Available</p>
+        </div>
+        <% } else { %>
+        <div class="display-jobs-container">
+          <% jobs.map((job) => { %>
+          <div class="active-jobs-container" data-id="<%= job._id %>">
+            <% if (job.companyImage == "") { %>
+            <img
+              src="https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg"
+              alt=""
+            />
             <% } else { %>
-                <div class="display-jobs-container">
-                    <% jobs.map((job) => { %>
-                        <div class="active-jobs-container" data-id= "<%= job._id %>">
-                            <% if (job.companyImage == "") { %>
-                                <img src="https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg" alt="">
-                            <% } else { %>
-                            <img src="<%= job.companyImage %>" alt="">
-                            <% } %>
-                            <div class="job-details">
-                                <p><%= job.companyName %> - <span><%= job.companylocation %></span></p>
-                                <p><%= job.jobTitle %></p>
-                                <p><%= job.salary %></p>
-                            </div>
-                        </div>
-                    <% }) %>
-                </div>
+            <img src="<%= job.companyImage %>" alt="" />
             <% } %>
-            <!-- more info -->
-            <div class="job-more-info-container" student-id="<%= locals.user._id %>">
+            <div class="job-details">
+              <p>
+                <%= job.companyName %> - <span><%= job.companylocation %></span>
+              </p>
+              <p><%= job.jobTitle %></p>
+              <p><%= job.salary %></p>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+        <% } %>
+        <!-- more info -->
+        <div
+          class="job-more-info-container"
+          student-id="<%= locals.user._id %>"
+        ></div>
+      </div>
 
-            </div>
+      <!-- applied -->
+      <div class="appliedJobs-main-container">
+        <!-- heading -->
+        <div class="heading">
+          <h2>Applied Jobs</h2>
         </div>
+        <!-- active applied -->
+        <% let count = 0; %>
+        <div class="display-applied-container">
+          <% interviews.map((interview) => { %> <% if(interview.student_id ==
+          user._id) { %> <% count++; %>
+          <div class="active-applied-container" job-id="<%=interview._id%>">
+            <div class="applied-details">
+              <div class="applied-company-img">
+                <img src="<%= interview.companyImage %>" alt="" />
+              </div>
+              <div>
+                <p>
+                  <%= interview.companyName %> - <%= interview.companyLocation
+                  %>
+                </p>
+                <div><%= interview.jobTitle %></div>
+              </div>
+            </div>
+            <div class="applied-job-salary">
+              <p><%= interview.jobSalary %></p>
+            </div>
+            <% if(interview.appliedStatus == "Pending") { %>
+            <div class="status">
+              <!-- <p>Pending</p> -->
+              <div class="pending-color"></div>
+            </div>
+            <% } else if(interview.appliedStatus == "Accepted") { %>
+            <div class="status">
+              <!-- <p>Accepted</p> -->
+              <div class="accepted-color"></div>
+            </div>
+            <% } else { %>
+            <div class="status">
+              <!-- <p>Rejected</p> -->
+              <div class="rejected-color"></div>
+            </div>
+            <% } %>
+          </div>
+          <% } %> <% }) %> <% if (count == 0) { %>
+          <div class="no-found">
+            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+            <lottie-player
+              src="https://lottie.host/f135a538-9be5-4487-b2da-7f49b93e8dbf/Y22iaG84qI.json"
+              background="transparent"
+              speed="1"
+              style="width: 300px; height: 300px"
+              loop
+              autoplay
+              direction="1"
+              mode="normal"
+            ></lottie-player>
+            <p>No Applied jobs</p>
+          </div>
+          <% } %>
+        </div>
+      </div>
 
-        <!-- applied -->
-        <div class="appliedJobs-main-container">
-            <!-- heading -->
-            <div class="heading">
-                <h2>Applied Jobs</h2>
-            </div>
-            <!-- active applied -->
-            <% let count = 0; %>
-            <div class="display-applied-container">
-                <% interviews.map((interview) => { %>
-                    <% if(interview.student_id == user._id) { %>
-                        <% count++; %>
-                        <div class="active-applied-container" job-id="<%=interview._id%>">
-                            <div class="applied-details">
-                                <div class="applied-company-img">
-                                    <img src="<%= interview.companyImage %>" alt="">
-                                </div>
-                                <div>
-                                    <p><%= interview.companyName %> - <%= interview.companyLocation %></p>
-                                    <div><%= interview.jobTitle %></div>
-                                </div>
-                            </div>
-                            <div class="applied-job-salary">
-                                <p><%= interview.jobSalary %></p>
-                            </div>
-                            <% if(interview.appliedStatus == "Pending") { %>
-                                <div class="status">
-                                    <!-- <p>Pending</p> -->
-                                    <div class="pending-color"></div>
-                                </div>
-                            <% } else if(interview.appliedStatus == "Accepted") { %>
-                                <div class="status">
-                                    <!-- <p>Accepted</p> -->
-                                    <div class="accepted-color"></div>
-                                </div>
-                            <% } else { %>
-                                <div class="status">
-                                    <!-- <p>Rejected</p> -->
-                                    <div class="rejected-color"></div>
-                                </div>
-                            <% } %>
-                        </div>
-                    <% } %>
-                <% }) %>
-                <% if (count == 0) { %>
-                    <div class="no-found">
-                        <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script><lottie-player src='https://lottie.host/f135a538-9be5-4487-b2da-7f49b93e8dbf/Y22iaG84qI.json' background='transparent' speed='1' style='width: 300px; height: 300px' loop autoplay direction='1' mode='normal'></lottie-player>
-                        <p>No Applied jobs</p>
-                    </div>
-                <% } %>
-            </div>
+      <!-- right container -->
+      <div class="right-aside-container">
+        <div class="reminder-container">
+          <p>reminder</p>
         </div>
-                       
-        <!-- right container -->
-        <div class="right-aside-container">
-            <div class="reminder-container">
-                <p>reminder</p>
-            </div>
-        </div>
+      </div>
     </div>
 
     <div class="user-more-info-container">
-        <p>Tell us more about you!</p>
-        <a href="/userEditProfile"><button class="user-more-info-button">Edit profile</button></a>
-        <i onclick="closeContainerbtn()" class="fa-solid fa-xmark container-close-btn"></i>
+      <p>Tell us more about you!</p>
+      <a href="/userEditProfile"
+        ><button class="user-more-info-button">Edit profile</button></a
+      >
+      <i
+        onclick="closeContainerbtn()"
+        class="fa-solid fa-xmark container-close-btn"
+      ></i>
     </div>
-
 
     <script src="/js/izitoast.js"></script>
     <!-- js files -->
     <script src="/js/dashboard.js"></script>
 
     <script>
-        <% if (flash.success && flash.success.length > 0) { %> 
-            iziToast.success({
-                title: 'Success',
-                message: '<%= flash.success %>',
-                theme: 'dark',
-                backgroundColor: 'linear-gradient(130deg, rgba(18,119,243,1) 0%, rgba(11,73,149,1) 97%)',
-                position: 'topCenter',
-                progressBarColor: 'white',
-                transitionInMobile: 'fadeInUp',
-                transitionOutMobile: 'fadeOutUp',
-                
-            });
-        <% } %>
+      <% if (flash.success && flash.success.length > 0) { %>
+          iziToast.success({
+              title: 'Success',
+              message: '<%= flash.success %>',
+              theme: 'dark',
+              backgroundColor: 'linear-gradient(130deg, rgba(18,119,243,1) 0%, rgba(11,73,149,1) 97%)',
+              position: 'topCenter',
+              progressBarColor: 'white',
+              transitionInMobile: 'fadeInUp',
+              transitionOutMobile: 'fadeOutUp',
 
-        <% if (flash.error && flash.error.length > 0) { %> 
-            iziToast.error({
-                title: 'Error',
-                message: '<%= flash.error %>',
-                theme: 'dark',
-                backgroundColor: '#AA0808',
-                position: 'topCenter',
-                progressBarColor: 'white',
-                transitionInMobile: 'fadeInUp',
-                transitionOutMobile: 'fadeOutUp',
-            });
-        <% } %>
+          });
+      <% } %>
 
-        <% if (flash.info && flash.info.length > 0) { %> 
-            iziToast.warning({
-                title: 'Caution',
-                message: '<%= flash.info %>',
-                theme: 'dark',
-                backgroundColor: '#FFB300',
-                position: 'topCenter',
-                progressBarColor: 'white',
-                transitionInMobile: 'fadeInUp',
-                transitionOutMobile: 'fadeOutUp',
-            });
-        <% } %>
+      <% if (flash.error && flash.error.length > 0) { %>
+          iziToast.error({
+              title: 'Error',
+              message: '<%= flash.error %>',
+              theme: 'dark',
+              backgroundColor: '#AA0808',
+              position: 'topCenter',
+              progressBarColor: 'white',
+              transitionInMobile: 'fadeInUp',
+              transitionOutMobile: 'fadeOutUp',
+          });
+      <% } %>
 
-        <% if (flash.warning && flash.warning.length > 0) { %> 
-            iziToast.error({
-                title: 'Error',
-                message: '<%= flash.warning %>',
-                theme: 'dark',
-                backgroundColor: '#AA0808',
-                position: 'topCenter',
-                progressBarColor: 'white',
-                transitionInMobile: 'fadeInUp',
-                transitionOutMobile: 'fadeOutUp',
-            });
-        <% } %>
+      <% if (flash.info && flash.info.length > 0) { %>
+          iziToast.warning({
+              title: 'Caution',
+              message: '<%= flash.info %>',
+              theme: 'dark',
+              backgroundColor: '#FFB300',
+              position: 'topCenter',
+              progressBarColor: 'white',
+              transitionInMobile: 'fadeInUp',
+              transitionOutMobile: 'fadeOutUp',
+          });
+      <% } %>
+
+      <% if (flash.warning && flash.warning.length > 0) { %>
+          iziToast.error({
+              title: 'Error',
+              message: '<%= flash.warning %>',
+              theme: 'dark',
+              backgroundColor: '#AA0808',
+              position: 'topCenter',
+              progressBarColor: 'white',
+              transitionInMobile: 'fadeInUp',
+              transitionOutMobile: 'fadeOutUp',
+          });
+      <% } %>
     </script>
-</body>
+  </body>
 </html>

@@ -24,4 +24,8 @@ router.get('/auth/github/callback', passport.authenticate(
     { failureRedirect: '/' },
 ), usersController.createSession);
 
+router.post('/forgot-password', usersController.forgetPassword);
+router.get('/reset-password/:token', usersController.resetPassword);
+router.post('/fogot-user-password', usersController.updatePassword);
+
 module.exports = router;

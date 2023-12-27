@@ -361,9 +361,6 @@ input:-webkit-autofill {
     margin: 10px 0px;
     font-size: 0.8rem;
     font-weight: 600;
-}
-
-.forget-password-container a {
     color: #333de2;
     text-decoration: none;
     cursor: pointer;
@@ -474,4 +471,89 @@ input:-webkit-autofill {
     align-items: center;
     position: relative;
     right: 5%;
+}
+
+.forget-password-reset-container {
+    width: 450px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2), -5px -5px 10px #fafbfe;
+    display: none;
+}
+
+.forget-password-reset-container.active {
+    display: flex;
+}
+
+.forget-password-form-heading {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.forgot-form p {
+    width: 90%;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.forget-password-form-heading h1 {
+    width: inherit;
+    text-align: center;
+}
+
+.forget-reset-btn {
+    width: 40%;
+    height: 45px;
+    background-color: #333de2;
+    border-radius: 20px;
+    margin: 20px;
+    cursor: pointer;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 1px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2), -5px -5px 10px #fafbfe;
+}
+
+
+.password-reset-container {
+    padding: 20px;
+    width: 450px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2), -5px -5px 10px #fafbfe;
+}
+
+.password-reset-container-heading h1 {
+    width: inherit;
+    text-align: center;
+}
+
+.password-reset-container-heading {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.password-reset-form p {
+    width: 90%;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.password-reset-button {
+    width: 60%;
+    height: 45px;
+    background-color: #333de2;
+    border-radius: 17px;
+    margin: 20px;
+    cursor: pointer;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 1px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2), -5px -5px 10px #fafbfe;
 }
