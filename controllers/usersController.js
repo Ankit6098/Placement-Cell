@@ -197,6 +197,8 @@ module.exports.updatePassword = async function (req, res) {
               await user.save();
               console.log("Password updated successfully");
               req.flash("success", "Password updated successfully");
+              // distroy the token
+              jwt.destroy(accessToken);
               return res.redirect("/authentication");
             } catch (err) {
               console.error(err);

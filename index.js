@@ -22,6 +22,7 @@ const passportGithub = require("./config/passport-github2-strategy");
 const session = require("express-session");
 const flash = require("connect-flash");
 const customWare = require("./config/izitoast");
+const { default: mongoose } = require("mongoose");
 
 // setup the view engine
 app.set("view engine", "ejs");
